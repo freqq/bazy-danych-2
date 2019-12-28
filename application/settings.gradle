@@ -1,0 +1,6 @@
+rootProject.name = 'airline-wroclaw'
+
+include ':components'
+include ':components:sm-frontend'
+include ':docker'
+incldue ':docker:sm-frontend'

@@ -1,0 +1,8 @@
+project.ext {
+    imageTag = 'v1'
+    microserviceName = project.name.replaceAll('/', '-').replaceAll('_', '-')
+    jarName = project.name.replaceAll('-', '_')
+    dockerDirPath = "${project.buildDir}/docker"
+}
+
+task appInstall{}

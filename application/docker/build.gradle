@@ -1,0 +1,45 @@
+description = 'docker'
+
+apply plugin: 'base'
+
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+
+    ext {
+        configurationDir = "${project.rootDir}/docker/configuration"
+        microserviceScriptDir = "${project.rootDir}/docker/configuration/resources/microservice.sh"
+        commonRegistry = "epsec-docker-releases.repo.lab.pl.alcatel-lucent.com/common"
+        bcmtRegistry = "bcmt-registry:5000"
+    }
+
+    dependencies {
+        classpath 'com.kohlschutter.junixsocket:junixsocket-common:2.0.4'
+        classpath 'com.kohlschutter.junixsocket:junixsocket-native-common:2.0.4'
+        classpath 'com.bmuschko:gradle-docker-plugin:3.6.0'
+    }
+}
+
+def getDockerBuildDir() {
+    return "${project.rootDir}/docker/build"
+}
+def getDockerImagesDir() {
+    return "${project.rootDir}/../deployment/package/images"
+}
+
+def getDockerImagePath(archive_name) {
+    return getDockerImagesDir() + "/${archive_name}.tar"
+}
+
+def getComponentBuildDir(service_name) {
+    return "${project.rootDir}/components/${service_name}/build/"
+}
+
+def getComponentDistributionDir(service_name) {
+    return getComponentBuildDir(service_name) + "/distributions/"
+}
+
+def getComponentLibsDir(service_name) {
+    return getComponentBuildDir(service_name) + "/libs/"
+}
