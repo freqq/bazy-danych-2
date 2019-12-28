@@ -1,0 +1,82 @@
+{
+  "name": "front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^6.0.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
+    "prettier": "^1.14.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-floating-label-input": "^4.2.1",
+    "react-loadable": "^5.5.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-router-redux": "next",
+    "react-scripts": "3.1.1",
+    "react-transition-group": "^4.3.0",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "shortid": "^2.2.13",
+    "styled-components": "^3.4.9"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest --env=jsdom --coverage",
+    "test:watch": "jest --env=jsdom --watch",
+    "lint": "eslint --ext js,jsx src"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/config/jest/testSetup.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx}",
+      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx}"
+    ],
+    "testResultsProcessor": "jest-sonar-reporter",
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
