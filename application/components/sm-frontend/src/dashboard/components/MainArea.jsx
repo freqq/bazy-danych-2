@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import AppToolbar from "dashboard/components/AppToolbar";
 import PropTypes from "prop-types";
+import DashboardRouter from "dashboard/routers/DashboardRouter";
 
 const MainAreaWrapper = styled.div.attrs({ className: "main-area-wrapper" })`
   grid-area: main-area-wrapper;
@@ -95,6 +96,7 @@ class MainArea extends Component {
           </NavbarRightMenu>
         </MainAreaNavBar>
         <AppToolbar />
+        <DashboardRouter />
       </MainAreaWrapper>
     );
   }

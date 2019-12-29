@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import ProgressIndicatorCircularImage from "images/progress_indicator.svg";
+import ProgressIndicatorCircularImage from "images/blue-indicator.svg";
 
 const CenteringWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  weight: 100%;
+  position: absolute;
+  top: 80%;
+  left: 50%;
 `;
 
 const ProgressIndicatorCircular = () => {

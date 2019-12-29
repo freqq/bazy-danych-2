@@ -20,7 +20,7 @@ export const LoadableDashboard = makeLoadable(() =>
 const RootRouter = () => (
   <Switch>
     <LoggedInRoute exact path={ROOT_PATH} component={LoadableStartPage} />
-    <PrivateRoute exact path={DASHBOARD_PATH} component={LoadableDashboard} />
+    <PrivateRoute path={DASHBOARD_PATH} component={LoadableDashboard} />
     <PrivateRoute component={NotFoundPage} />
   </Switch>
 );

@@ -6,6 +6,7 @@ import alertReducer from "alerts/alertReducer";
 import commonReducer from "common/reducers";
 import authDataReducer from "start-page/reducers";
 import userDataReducer from "dashboard/reducers";
+import subpagesReducer from "dashboard/subpages/reducers";
 
 export const history = createBrowserHistory();
 
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   router: routerReducer,
   common: commonReducer,
   auth: authDataReducer,
-  user: userDataReducer
+  user: userDataReducer,
+  subpages: subpagesReducer
 });
 
 export const store = createStore(

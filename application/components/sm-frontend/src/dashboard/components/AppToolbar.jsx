@@ -7,7 +7,7 @@ const AppToolbarWrapper = styled.div.attrs({
   background: #f5f4f4;
   width: 100%;
   border-bottom: 2px solid #eeeeee;
-  padding: 40px;
+  padding: 30px;
 `;
 
 const ToolbarHeader = styled.p.attrs({ className: "toolbar-header" })`

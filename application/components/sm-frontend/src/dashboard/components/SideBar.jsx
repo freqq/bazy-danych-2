@@ -46,7 +46,7 @@ const SideNavigationItem = styled.li.attrs({
   padding: 15px;
   transition: 0.15s;
   display: block;
-  color: #fefefe;
+  color: #9eaabd;
   border-bottom: 2px solid #3f5981;
 
   &:last-child {
@@ -70,7 +70,6 @@ const SideNavigationLeftIcon = styled.li.attrs({
 const SideNavigationLink = styled(Link).attrs({
   className: "side-navigation-link"
 })`
-  color: #9eaabd;
   font-family: "Roboto", sans-serif;
   font-weight: 100;
   text-decoration: none;
@@ -79,7 +78,7 @@ const SideNavigationLink = styled(Link).attrs({
 const SideNavigationGotoIcon = styled.i.attrs({
   className: "side-navigation-goto-icon fas fa-chevron-right"
 })`
-    float: right;
+  float: right;
 `;
 
 const NAVIGATION_ITEMS = [
@@ -124,12 +123,12 @@ class SideBar extends Component {
   renderNavigation = () => (
     <SideNavigation>
       {NAVIGATION_ITEMS.map(item => (
-        <SideNavigationItem>
-          <SideNavigationLeftIcon className={item.icon} />
-          <SideNavigationLink to={item.to}>
+        <SideNavigationLink to={item.to}>
+          <SideNavigationItem>
+            <SideNavigationLeftIcon className={item.icon} />
             {item.name} <SideNavigationGotoIcon />
-          </SideNavigationLink>
-        </SideNavigationItem>
+          </SideNavigationItem>
+        </SideNavigationLink>
       ))}
     </SideNavigation>
   );
