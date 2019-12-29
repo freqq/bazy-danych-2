@@ -4,6 +4,7 @@ import getPath from "common/utils/path";
 import makeLoadable from "common/utils/loadable";
 import NotFoundPage from "common/components/NotFoundPage";
 import PrivateRoute from "common/components/PrivateRoute";
+import LoggedInRoute from "common/components/LoggedInRoute";
 
 export const ROOT_PATH = getPath("/");
 export const DASHBOARD_PATH = getPath("/admin");
@@ -18,7 +19,7 @@ export const LoadableDashboard = makeLoadable(() =>
 
 const RootRouter = () => (
   <Switch>
-    <Route exact path={ROOT_PATH} component={LoadableStartPage} />
+    <LoggedInRoute exact path={ROOT_PATH} component={LoadableStartPage} />
     <PrivateRoute exact path={DASHBOARD_PATH} component={LoadableDashboard} />
     <PrivateRoute component={NotFoundPage} />
   </Switch>

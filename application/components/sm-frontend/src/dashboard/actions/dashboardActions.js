@@ -21,6 +21,19 @@ export const makeUserFail = () => ({
   type: USER_FAIL
 });
 
+export const makeLogoutFetching = () => ({
+  type: USER_FETCHING
+});
+
+export const makeLogoutOk = data => ({
+  type: USER_OK,
+  payload: data
+});
+
+export const makeLogoutFail = () => ({
+  type: USER_FAIL
+});
+
 const getUserFunction = dispatch => {
   dispatch(makeUserFetching());
 
@@ -33,4 +46,11 @@ const getUserFunction = dispatch => {
     });
 };
 
+const logoutFunction = dispatch => {
+  localStorage.removeItem("jwtToken");
+  dispatch(push("/"));
+};
+
 export const getUser = () => dispatch => getUserFunction(dispatch);
+
+export const logout = () => dispatch => logoutFunction(dispatch);

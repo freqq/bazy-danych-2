@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import DashboardWrapper from "dashboard/containers/DashboardWrapper";
 import withLoading, { ProgIndSize } from "common/utils/withLoading";
-import { getUser } from "dashboard/actions/dashboardActions";
+import { getUser, logout } from "dashboard/actions/dashboardActions";
 
 const DashboardWithLoading = withLoading(
   DashboardWrapper,
@@ -16,9 +16,21 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { userName, firstName, lastName, isLoading } = this.props;
+    const {
+      userName,
+      firstName,
+      lastName,
+      isLoading,
+      logoutCurrentUser
+    } = this.props;
 
-    return <DashboardWithLoading isLoading={isLoading} userName={userName} />;
+    return (
+      <DashboardWithLoading
+        isLoading={isLoading}
+        userName={userName}
+        logoutCurrentUser={logoutCurrentUser}
+      />
+    );
   }
 }
 
@@ -28,6 +40,7 @@ Dashboard.propTypes = {
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   getCurrentUser: PropTypes.func.isRequired,
+  logoutCurrentUser: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired
 };
@@ -42,7 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getCurrentUser: () => dispatch(getUser())
+  getCurrentUser: () => dispatch(getUser()),
+  logoutCurrentUser: () => dispatch(logout())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

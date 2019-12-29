@@ -17,18 +17,19 @@ const DashboardWrapperComponent = styled.div.attrs({
 
 class DashboardWrapper extends Component {
   render() {
-    const { userName } = this.props;
+    const { userName, logoutCurrentUser } = this.props;
     return (
       <DashboardWrapperComponent>
         <SideBar />
-        <MainArea />
+        <MainArea userName={userName} logoutCurrentUser={logoutCurrentUser} />
       </DashboardWrapperComponent>
     );
   }
 }
 
 DashboardWrapper.propTypes = {
-  userName: PropTypes.string.isRequired
+  userName: PropTypes.string.isRequired,
+  logoutCurrentUser: PropTypes.func.isRequired
 };
 
 export default DashboardWrapper;

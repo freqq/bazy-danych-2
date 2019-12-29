@@ -12,6 +12,7 @@ const SideBarWrapper = styled.div.attrs({
 
 const SideBarHeader = styled.div.attrs({ className: "side-bar-header" })`
   background: #354d73;
+  height: 30px;
   padding: 20px;
   border-bottom: 2px solid #3e577f;
 `;
@@ -19,7 +20,7 @@ const SideBarHeader = styled.div.attrs({ className: "side-bar-header" })`
 const SideBarHeaderImage = styled.img.attrs({
   className: "side-bar-header-image"
 })`
-  width: 100px;
+  width: 80px;
   margin: 0;
   display: inline-block;
 `;
@@ -27,7 +28,7 @@ const SideBarHeaderImage = styled.img.attrs({
 const NavigationHeader = styled.p.attrs({ className: "navigation-header" })`
   font-size: 11px;
   text-transform: uppercase;
-  margin: 20px 0 0 15px;
+  margin: 20px 0 10px 15px;
   font-family: "Roboto", sans-serif;
   color: #6079a2;
 `;
@@ -69,8 +70,9 @@ const SideNavigationLeftIcon = styled.li.attrs({
 const SideNavigationLink = styled(Link).attrs({
   className: "side-navigation-link"
 })`
-  color: #6079a2;
+  color: #9eaabd;
   font-family: "Roboto", sans-serif;
+  font-weight: 100;
   text-decoration: none;
 `;
 
