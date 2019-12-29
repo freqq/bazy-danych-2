@@ -20,7 +20,7 @@ const RootRouter = () => (
   <Switch>
     <Route exact path={ROOT_PATH} component={LoadableStartPage} />
     <PrivateRoute exact path={DASHBOARD_PATH} component={LoadableDashboard} />
-    <Route component={NotFoundPage} />
+    <PrivateRoute component={NotFoundPage} />
   </Switch>
 );
 

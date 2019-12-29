@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ProgressIndicatorCircular from 'images/progress_indicator.svg';
+import ProgressIndicatorCircular from 'images/button_indicator_black.svg';
 
 export const ProgIndSize = {
   SMALL: { small: true },

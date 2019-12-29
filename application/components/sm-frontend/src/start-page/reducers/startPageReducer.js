@@ -5,7 +5,6 @@ import {
 } from "start-page/actions/startPageActions";
 
 export const INITIAL_STATE = {
-  data: null,
   isError: false,
   isFetching: false
 };
@@ -13,11 +12,12 @@ export const INITIAL_STATE = {
 export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case LOGIN_OK:
+      const token = payload.accessToken;
+      localStorage.setItem("jwtToken", token);
       return {
         ...state,
         isError: false,
-        isFetching: false,
-        data: { ...payload }
+        isFetching: false
       };
     case LOGIN_FAIL:
       return { ...state, data: null, isFetching: false, isError: true };

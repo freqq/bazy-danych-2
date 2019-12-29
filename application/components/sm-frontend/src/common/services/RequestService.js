@@ -1,15 +1,16 @@
-import axios from 'axios';
-import httpStatuses from 'common/httpStatuses';
+import axios from "axios";
+import httpStatuses from "common/httpStatuses";
 
-const JSON_CONTENT_TYPE = 'application/json';
+const JSON_CONTENT_TYPE = "application/json";
 
 class RequestService {
   constructor() {
     this.axiosInstance = axios.create({
       headers: {
-        'Content-Type': JSON_CONTENT_TYPE,
-        'X-Requested-With': 'XMLHttpRequest',
-      },
+        "Content-Type": JSON_CONTENT_TYPE,
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: "Bearer " + localStorage.getItem("jwtToken")
+      }
     });
 
     this.axiosInstance.interceptors.response.use(
@@ -21,7 +22,7 @@ class RequestService {
         }
 
         return Promise.reject(error);
-      },
+      }
     );
   }
 

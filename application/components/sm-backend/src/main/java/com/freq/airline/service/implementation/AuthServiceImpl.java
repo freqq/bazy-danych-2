@@ -80,15 +80,6 @@ public class AuthServiceImpl implements AuthService {
 
         String jwt = jwtTokenProvider.generateToken(authentication);
 
-        Optional<User> user = userRepository.findByUsername(loginRequest.getUsername());
-        User userObject;
-
-        if(user.isPresent())
-            userObject = user.get();
-        else
-            return ResponseEntity.noContent().build();
-
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt,userObject.getUsername(), userObject.getFirstName(),
-                userObject.getLastName(), userObject.getEmail(), userObject.getRoles()));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 }

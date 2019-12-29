@@ -27,13 +27,12 @@ const TextArea = styled.div.attrs({ className: "text-area" })`
 
 class StartPage extends Component {
   render() {
-    const { userData, loginFetching, loginError, loginFunc } = this.props;
+    const { loginFetching, loginError, loginFunc } = this.props;
 
     return (
       <StartPageWrapper>
         <LoginArea
           loginFunc={loginFunc}
-          userData={userData}
           loginFetching={loginFetching}
           loginError={loginError}
         />
@@ -48,9 +47,8 @@ StartPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userData: state.user.userData.data,
-  loginFetching: state.user.userData.isFetching,
-  loginError: state.user.userData.isError
+  loginFetching: state.auth.authData.isFetching,
+  loginError: state.auth.authData.isError
 });
 
 const mapDispatchToProps = dispatch => ({
