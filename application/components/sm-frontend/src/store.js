@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import thunkMiddleware from "redux-thunk";
 import alertReducer from "alerts/alertReducer";
 import commonReducer from "common/reducers";
+import userDataReducer from "start-page/reducers";
 
 export const history = createBrowserHistory();
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   alerts: alertReducer,
   router: routerReducer,
   common: commonReducer,
+  user: userDataReducer
 });
 
 export const store = createStore(
