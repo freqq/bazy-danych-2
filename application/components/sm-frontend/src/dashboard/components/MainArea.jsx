@@ -21,8 +21,6 @@ const NavbarRightMenu = styled.ul.attrs({ className: "navbar-right-menu" })`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  height: 50px;
-  display: inline-block;
 `;
 
 const NavbarLeftMenu = styled.ul.attrs({ className: "navbar-left-menu" })`
@@ -38,9 +36,9 @@ const NavbarRightMenuItem = styled.li.attrs({
 })`
   margin: 0;
   padding: 10px 20px;
-  display: inline-block;
   border-left: 2px solid #efeeee;
-  height: 100%;
+  height: 50px;
+  display: inline-table;
   font-size: 13px;
 
   &:hover {
@@ -81,17 +79,15 @@ class MainArea extends Component {
     return (
       <MainAreaWrapper>
         <MainAreaNavBar>
-          <NavbarLeftMenu>
-            <NavbarLeftMenuItem>123</NavbarLeftMenuItem>
-            <NavbarLeftMenuItem>123</NavbarLeftMenuItem>
-          </NavbarLeftMenu>
           <NavbarRightMenu>
             <NavbarRightMenuItem>
               <UserCircle>{userName.charAt(0).toUpperCase()}</UserCircle>
               {userName}
             </NavbarRightMenuItem>
             <NavbarRightMenuItem onClick={this.props.logoutCurrentUser}>
-              Log out
+              <UserCircle style={{ padding: "5px 7px" }}>
+                <i class="fas fa-sign-out-alt"></i>
+              </UserCircle>
             </NavbarRightMenuItem>
           </NavbarRightMenu>
         </MainAreaNavBar>

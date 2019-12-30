@@ -1,6 +1,7 @@
 package com.freq.airline.service.implementation;
 
 import com.freq.airline.model.Plane;
+import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.repository.PlanesRepository;
 import com.freq.airline.service.PlanesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,15 @@ public class PlanesServiceImpl implements PlanesService {
         }
 
         return new ResponseEntity<>("Plane with given ID not found", HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<?> addPlane(PlaneRequest planeRequest){
+        Plane plane = new Plane();
+        plane.setPlaneModel(planeRequest.getPlaneModel());
+        plane.setSeatsCount(Integer.parseInt(planeRequest.getSeatsCount()));
+
+        planesRepository.save(plane);
+
+        return new ResponseEntity<>("Plane created", HttpStatus.OK);
     }
 }

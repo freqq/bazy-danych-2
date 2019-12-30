@@ -4,11 +4,13 @@ import {
   PLANES_FAIL,
   PLANE_REMOVE_OK,
   PLANE_REMOVE_FETCHING,
-  PLANE_REMOVE_FAIL
+  PLANE_REMOVE_FAIL,
+  PLANE_SEARCHING
 } from "dashboard/subpages/actions/planesActions";
 
 export const INITIAL_STATE = {
   data: [],
+  searchData: [],
   isError: false,
   isFetching: false,
   remove: {
@@ -23,6 +25,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         data: payload,
+        searchData: payload,
         isError: false,
         isFetching: false
       };
@@ -36,6 +39,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         data: [],
+        searchData: [],
         isFetching: true,
         isError: false
       };
@@ -62,6 +66,16 @@ export default (state = INITIAL_STATE, { type, payload }) => {
           isFetching: false,
           isError: true
         }
+      };
+    case PLANE_SEARCHING:
+      return {
+        ...state,
+        searchData: state.data.filter(
+          obj =>
+            JSON.stringify(obj)
+              .toLowerCase()
+              .indexOf(payload.toLowerCase()) !== -1
+        )
       };
     default:
       return state;

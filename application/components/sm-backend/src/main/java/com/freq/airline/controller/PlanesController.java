@@ -1,11 +1,14 @@
 package com.freq.airline.controller;
 
 import com.freq.airline.model.Plane;
+import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.service.PlanesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +27,15 @@ public class PlanesController {
     }
 
     @PostMapping("/remove/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> removePlane(@PathVariable("id") Long planeId){
         return planesService.removePlane(planeId);
     }
+
+    @PostMapping("/")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> addPlane(@Valid @RequestBody PlaneRequest planeRequest){
+        return planesService.addPlane(planeRequest);
+    }
+
 }

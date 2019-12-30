@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface PlanesRepository  extends JpaRepository<Plane, Long> {
     List<Plane> findAll();
     Optional<Plane> findById(int planeId);
+    Optional<Plane> findByPlaneModel(String planeModel);
     void removeById(Long planeId);
 }

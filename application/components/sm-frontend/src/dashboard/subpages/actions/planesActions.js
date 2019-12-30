@@ -1,6 +1,7 @@
 import {
   fetchPlanes,
-  removePlaneById
+  removePlaneById,
+  addPlane
 } from "dashboard/subpages/handlers/planesHandlers";
 
 export const PLANES_FETCHING = "PLANES_FETCHING";
@@ -9,6 +10,10 @@ export const PLANES_FAIL = "PLANES_FAIL";
 export const PLANE_REMOVE_FETCHING = "PLANE_REMOVE_FETCHING";
 export const PLANE_REMOVE_OK = "PLANE_REMOVE_OK";
 export const PLANE_REMOVE_FAIL = "PLANE_REMOVE_FAIL";
+export const PLANE_ADD_FETCHING = "PLANE_ADD_FETCHING";
+export const PLANE_ADD_OK = "PLANE_ADD_OK";
+export const PLANE_ADD_FAIL = "PLANE_ADD_FAIL";
+export const PLANE_SEARCHING = "PLANE_SEARCHING";
 
 export const makePlanesFetching = () => ({
   type: PLANES_FETCHING
@@ -35,6 +40,23 @@ export const makePlanesRemoveFail = () => ({
   type: PLANE_REMOVE_FAIL
 });
 
+export const makePlanesAddFetching = () => ({
+  type: PLANE_ADD_FETCHING
+});
+
+export const makePlanesAddOk = () => ({
+  type: PLANE_ADD_OK
+});
+
+export const makePlanesAddFail = () => ({
+  type: PLANE_ADD_FAIL
+});
+
+export const makeSearching = data => ({
+  type: PLANE_SEARCHING,
+  payload: data
+});
+
 const getPlanesFunction = dispatch => {
   dispatch(makePlanesFetching());
 
@@ -47,7 +69,18 @@ const getPlanesFunction = dispatch => {
     });
 };
 
-const planeAddFunction = (planeData, dispatch) => {};
+const planeAddFunction = (planeData, dispatch) => {
+  dispatch(makePlanesAddFetching());
+
+  return addPlane(planeData)
+    .then(() => {
+      dispatch(makePlanesAddOk());
+      getPlanesFunction(dispatch);
+    })
+    .catch(() => {
+      dispatch(makePlanesAddFail());
+    });
+};
 
 const planeEditFunction = (planeData, dispatch) => {};
 
@@ -66,6 +99,10 @@ const planeRemoveFunction = (planeId, dispatch) => {
     });
 };
 
+const planeSearchFunction = (searchData, dispatch) => {
+  dispatch(makeSearching(searchData));
+};
+
 export const planesGet = () => dispatch => getPlanesFunction(dispatch);
 export const planeAdd = planeData => dispatch =>
   planeAddFunction(planeData, dispatch);
@@ -73,3 +110,5 @@ export const planeEdit = planeData => dispatch =>
   planeEditFunction(planeData, dispatch);
 export const planeRemove = planeId => dispatch =>
   planeRemoveFunction(planeId, dispatch);
+export const planeSearch = searchData => dispatch =>
+  planeSearchFunction(searchData, dispatch);
