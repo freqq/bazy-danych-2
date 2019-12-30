@@ -51,15 +51,16 @@ class Planes extends Component {
       planesData,
       planeRemoving,
       searchPlane,
-      searchData
+      searchData,
+      planeAdding
     } = this.props;
     if (isError) return <FetchingErrorPlaceholder />;
     return (
       <PlanesSupbageWithLoading
         isLoading={isFetching}
-        style={applyStyle(planeRemoving)}
+        style={applyStyle(planeRemoving || planeAdding)}
       >
-        {planeRemoving && <ProgressIndicatorCircular />}
+        {(planeRemoving || planeAdding) && <ProgressIndicatorCircular />}
 
         <SubpageTitle>
           <SubpageIcon className="fas fa-plane" />
@@ -89,7 +90,8 @@ Planes.propTypes = {
   searchPlane: PropTypes.func.isRequired,
   isError: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  planeRemoving: PropTypes.bool.isRequired
+  planeRemoving: PropTypes.bool.isRequired,
+  planeAdding: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -97,7 +99,8 @@ const mapStateToProps = state => ({
   searchData: state.subpages.planes.searchData,
   isFetching: state.subpages.planes.isFetching,
   isError: state.subpages.planes.isError,
-  planeRemoving: state.subpages.planes.remove.isFetching
+  planeRemoving: state.subpages.planes.remove.isFetching,
+  planeAdding: state.subpages.planes.add.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

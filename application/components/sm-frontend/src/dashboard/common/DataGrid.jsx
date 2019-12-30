@@ -80,7 +80,7 @@ class DataGrid extends Component {
           ))}
         </DataGridRow>
         {this.props.rowData.length == 0 ? (
-          <NoData>No data available to fetch from server.</NoData>
+          <NoData>No data.</NoData>
         ) : (
           this.props.rowData.map(item => (
             <DataGridRow>

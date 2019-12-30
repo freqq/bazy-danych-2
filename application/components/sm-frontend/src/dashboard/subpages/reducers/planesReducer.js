@@ -5,6 +5,9 @@ import {
   PLANE_REMOVE_OK,
   PLANE_REMOVE_FETCHING,
   PLANE_REMOVE_FAIL,
+  PLANE_ADD_FETCHING,
+  PLANE_ADD_OK,
+  PLANE_ADD_FAIL,
   PLANE_SEARCHING
 } from "dashboard/subpages/actions/planesActions";
 
@@ -14,6 +17,10 @@ export const INITIAL_STATE = {
   isError: false,
   isFetching: false,
   remove: {
+    isError: false,
+    isFetching: false
+  },
+  add: {
     isError: false,
     isFetching: false
   }
@@ -63,6 +70,30 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         remove: {
+          isFetching: false,
+          isError: true
+        }
+      };
+    case PLANE_ADD_OK:
+      return {
+        ...state,
+        add: {
+          isFetching: false,
+          isError: false
+        }
+      };
+    case PLANE_ADD_FETCHING:
+      return {
+        ...state,
+        add: {
+          isFetching: true,
+          isError: false
+        }
+      };
+    case PLANE_ADD_FAIL:
+      return {
+        ...state,
+        add: {
           isFetching: false,
           isError: true
         }

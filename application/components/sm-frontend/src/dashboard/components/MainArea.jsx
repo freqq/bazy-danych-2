@@ -35,7 +35,7 @@ const NavbarRightMenuItem = styled.li.attrs({
   className: "navbar-right-menu-item"
 })`
   margin: 0;
-  padding: 10px 20px;
+  padding: 10px;
   border-left: 2px solid #efeeee;
   height: 50px;
   display: inline-table;

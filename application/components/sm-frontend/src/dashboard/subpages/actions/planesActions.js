@@ -74,8 +74,10 @@ const planeAddFunction = (planeData, dispatch) => {
 
   return addPlane(planeData)
     .then(() => {
-      dispatch(makePlanesAddOk());
-      getPlanesFunction(dispatch);
+      setTimeout(() => {
+        dispatch(makePlanesAddOk());
+        getPlanesFunction(dispatch);
+      }, 2000);
     })
     .catch(() => {
       dispatch(makePlanesAddFail());

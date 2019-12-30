@@ -63,8 +63,6 @@ class AddNew extends Component {
       Object.assign(addRequest, { [field]: this.state[field] });
     });
 
-    console.log(addRequest);
-
     this.props.onClick(addRequest);
   };
 
