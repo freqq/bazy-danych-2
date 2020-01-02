@@ -1,14 +1,10 @@
 package com.freq.airline.model;
 
-import com.freq.airline.model.date.DateAudit;
-import com.freq.airline.model.user.roles.Role;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -21,26 +17,26 @@ import java.util.Set;
 public class Client  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long id;
 
     @NotNull
     @Size(max = 30)
-    private String firstName;
+    public String firstName;
 
     @NotNull
     @Size(max = 30)
-    private String lastName;
+    public String lastName;
 
     @Size(max = 11)
-    private String pesel;
+    public String pesel;
 
-    private Date birthday;
+    public Date birthday;
 
-    private boolean isDiscount;
+    public boolean isDiscount;
 
-    private String email;
+    public String email;
 
-    private String IDNumber;
+    public String IDNumber;
 
     public Client() {}
 

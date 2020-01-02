@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import AddNew from "dashboard/subpages/components/AddNew";
+import BooleanGridCell from "dashboard/subpages/components/BooleanGridCell";
+import DateGridCell from "dashboard/subpages/components/DateGridCell";
 import DataGridCellMutable from "dashboard/common/DataGridCell";
 import PropTypes from "prop-types";
 
@@ -40,10 +42,6 @@ export const DataGridRow = styled.li.attrs({ className: "data-grid-row" })`
 export const DataGridCell = styled.div.attrs({ className: "data-grid-cell" })`
   border-right: 1px solid #edf2f4;
   padding: 10px;
-
-  &:nth-child(3n) {
-    border: none;
-  }
 
   &:hover {
     cursor: pointer;
@@ -104,12 +102,30 @@ class DataGrid extends Component {
         ) : (
           this.props.rowData.map(item => (
             <DataGridRow key={item}>
-              {Object.keys(item).forEach(key => (
-                <DataGridCellMutable
-                  value={item[key]}
-                  onClick={() => this.props.onEdit(item.id)}
-                />
-              ))}
+              {Object.keys(item).map(key => {
+                if (key !== "id") {
+                  if (key.toLowerCase().includes("discount"))
+                    return (
+                      <BooleanGridCell
+                        value={item[key]}
+                        onClick={() => this.props.onEdit(item.id)}
+                      />
+                    );
+                  if (key.toLowerCase().includes("birthday"))
+                    return (
+                      <DateGridCell
+                        value={item[key]}
+                        onClick={() => this.props.onEdit(item.id)}
+                      />
+                    );
+                  return (
+                    <DataGridCellMutable
+                      value={item[key]}
+                      onClick={() => this.props.onEdit(item.id)}
+                    />
+                  );
+                }
+              })}
               <DataGridCell>
                 <ActionButton
                   className="far fa-trash-alt"

@@ -11,6 +11,8 @@ import EditButton from "dashboard/subpages/components/EditButton";
 const EditPageWrapper = styled.div.attrs({ className: "edit-page-wrapper" })`
   margin: 0;
   padding: 5px 30px;
+  height: 76vh;
+  overflow-y: scroll;
 `;
 
 const EditPageWithLoading = withLoading(EditPageWrapper, ProgIndSize.XX_LARGE);

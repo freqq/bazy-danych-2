@@ -2,24 +2,18 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const DataGridCellWrapper = styled.div.attrs({ className: "data-grid-cell-mutable" })`
+const DataGridCellWrapper = styled.div.attrs({
+  className: "data-grid-cell-mutable"
+})`
   border-right: 1px solid #edf2f4;
   padding: 10px;
-
-  &:nth-child(3n) {
-    border: none;
-  }
 `;
 
 class DataGridCellMutable extends Component {
   render() {
     const { value, onClick } = this.props;
 
-    return (
-      <DataGridCellWrapper onClick={onClick}>
-        {value}
-      </DataGridCellWrapper>
-    );
+    return <DataGridCellWrapper onClick={onClick}>{value}</DataGridCellWrapper>;
   }
 }
 

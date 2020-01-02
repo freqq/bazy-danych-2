@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PlanesRepository  extends JpaRepository<Plane, Long> {
+public interface PlanesRepository extends JpaRepository<Plane, Long> {
     List<Plane> findAll();
     Optional<Plane> findById(int planeId);
     Optional<Plane> findByPlaneModel(String planeModel);

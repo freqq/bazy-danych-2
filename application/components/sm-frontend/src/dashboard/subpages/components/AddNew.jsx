@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TextInput from "dashboard/subpages/components/TextInput";
+import Checkbox from "dashboard/subpages/components/Checkbox";
 import PropTypes from "prop-types";
 import {
   DataGridCell,
@@ -19,7 +20,13 @@ class AddNew extends Component {
   componentDidMount() {
     var neededFieldsArray = [];
     this.props.columnHeaders.forEach(header => {
-      neededFieldsArray.push(this.camelize(header));
+      if (
+        this.camelize(header)
+          .toLowerCase()
+          .includes("idnumber")
+      )
+        neededFieldsArray.push(this.camelize(header).toLowerCase());
+      else neededFieldsArray.push(this.camelize(header));
     });
     neededFieldsArray.pop();
 
@@ -39,6 +46,9 @@ class AddNew extends Component {
     var camelized = this.camelize(event.target.name);
     var canSendForm = true;
 
+    if (camelized.toLowerCase().includes("idnumber"))
+      camelized = camelized.toLowerCase();
+
     this.setState(
       {
         [camelized]: event.target.value
@@ -57,13 +67,36 @@ class AddNew extends Component {
     );
   };
 
+  onCheckboxChange = event => {
+    const camelized = this.camelize(event.target.name);
+    const value = event.target.checked;
+    this.setState({ [camelized]: value });
+  };
+
   addData = () => {
     var addRequest = {};
     this.state.neededFields.forEach(field => {
       Object.assign(addRequest, { [field]: this.state[field] });
     });
 
+    console.log(addRequest);
+
     this.props.onClick(addRequest);
+  };
+
+  renderField = item => {
+    if (item.toLowerCase().includes("discount"))
+      return (
+        <Checkbox
+          checked={this.state[item]}
+          onChange={this.onCheckboxChange}
+          name={item}
+        />
+      );
+    else
+      return (
+        <TextInput name={item} placeholder={item} onChange={this.onChange} />
+      );
   };
 
   render() {
@@ -73,13 +106,7 @@ class AddNew extends Component {
     return (
       <DataGridRow>
         {render.splice(0, render.length - 1).map(item => (
-          <DataGridCell>
-            <TextInput
-              name={item}
-              placeholder={item}
-              onChange={this.onChange}
-            />
-          </DataGridCell>
+          <DataGridCell>{this.renderField(item)}</DataGridCell>
         ))}
         <DataGridCell>
           <ActionButton
