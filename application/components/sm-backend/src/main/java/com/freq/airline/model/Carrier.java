@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Carrier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long id;
 
-    private String carrierName;
+    public String carrierName;
 }
