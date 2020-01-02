@@ -108,9 +108,15 @@ class DataGrid extends Component {
           <NoData>No data.</NoData>
         ) : (
           this.props.rowData.map(item => (
-            <DataGridRow key={item} onClick={() => this.props.onEdit(item.id)}>
-              <DataGridCellMutable value={item.planeModel} />
-              <DataGridCellMutable value={item.seatsCount} />
+            <DataGridRow key={item}>
+              <DataGridCellMutable
+                value={item.planeModel}
+                onClick={() => this.props.onEdit(item.id)}
+              />
+              <DataGridCellMutable
+                value={item.seatsCount}
+                onClick={() => this.props.onEdit(item.id)}
+              />
               <DataGridCell>
                 <ActionButton
                   className="far fa-trash-alt"
