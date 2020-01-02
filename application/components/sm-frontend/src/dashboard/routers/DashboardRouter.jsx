@@ -17,7 +17,7 @@ export const LoadablePlanes = makeLoadable(() =>
 );
 
 export const LoadablePlanesEdit = makeLoadable(() =>
-  import("dashboard/subpages/EditPage")
+  import("dashboard/subpages/PlaneEdit")
 );
 
 const DashboardRouter = () => (

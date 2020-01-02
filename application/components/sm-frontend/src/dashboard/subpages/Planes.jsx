@@ -1,51 +1,22 @@
 import React, { Component } from "react";
-import DataGrid from "dashboard/common/DataGrid";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import styled from "styled-components";
+import ListPage from "dashboard/subpages/containers/ListPage";
 import withLoading, { ProgIndSize } from "common/utils/withLoading";
-import FetchingErrorPlaceholder from "common/components/FetchingErrorPlaceholder";
-import ProgressIndicatorCircular from "common/components/ProgressIndicatorCircular";
-import Search from "dashboard/subpages/components/Search";
-import { applyStyle } from "common/components/DisableOverlay";
 import {
   planeRemove,
   planesGet,
-  planeEdit,
   planeAdd,
   planeSearch,
   planesSort
 } from "dashboard/subpages/actions/planesActions";
 
-const PlanesSupbage = styled.div.attrs({ className: "dashbaord-subpage" })`
-  margin: 0;
-  padding: 5px 30px;
-  position: relative;
-`;
-
-const PlanesSupbageWithLoading = withLoading(
-  PlanesSupbage,
-  ProgIndSize.XX_LARGE
-);
-
-const SubpageTitle = styled.p.attrs({ className: "subpage-title" })`
-  font-size: 25px;
-`;
-
-const SubpageIcon = styled.li.attrs({ className: "side-navigation-left-icon" })`
-  margin: 0 20px 0 0;
-  color: #6079a2;
-  width: 20px;
-`;
+const ListPageWithLoading = withLoading(ListPage, ProgIndSize.XX_LARGE);
 
 const columnHeaders = ["Plane model", "Seats count", "Actions"];
 
 class Planes extends Component {
-  componentDidMount() {
-    this.props.getPlanes();
-  }
-
   render() {
     const {
       isFetching,
@@ -54,31 +25,32 @@ class Planes extends Component {
       planeRemoving,
       searchPlane,
       searchData,
-      planeAdding
+      planeAdding,
+      getPlanes,
+      removePlane,
+      planeEdit,
+      addPlane,
+      sortPlanes
     } = this.props;
-    if (isError) return <FetchingErrorPlaceholder />;
-    return (
-      <PlanesSupbageWithLoading
-        isLoading={isFetching}
-        style={applyStyle(planeRemoving || planeAdding)}
-      >
-        {(planeRemoving || planeAdding) && <ProgressIndicatorCircular />}
 
-        <SubpageTitle>
-          <SubpageIcon className="fas fa-plane" />
-          Planes
-        </SubpageTitle>
-        <Search rowData={planesData} searchPlane={searchPlane} />
-        <DataGrid
-          isLoading={isFetching}
-          columnHeaders={columnHeaders}
-          onDelete={this.props.removePlane}
-          onAdd={this.props.addPlane}
-          onEdit={this.props.planeEdit}
-          rowData={searchData}
-          onSort={this.props.sortPlanes}
-        />
-      </PlanesSupbageWithLoading>
+    return (
+      <ListPageWithLoading
+        isFetching={isFetching}
+        isError={isError}
+        pageTitle="Planes"
+        pageIcon="fas fa-plane"
+        objectsData={planesData}
+        searchData={searchData}
+        getObjects={getPlanes}
+        removeObject={removePlane}
+        objectEdit={planeEdit}
+        addObject={addPlane}
+        searchObjects={searchPlane}
+        sortObjects={sortPlanes}
+        objectRemoving={planeRemoving}
+        objectAdding={planeAdding}
+        columnHeaders={columnHeaders}
+      />
     );
   }
 }

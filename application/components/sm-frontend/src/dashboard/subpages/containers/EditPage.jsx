@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import withLoading, { ProgIndSize } from "common/utils/withLoading";
-import { planeById, planeEdit } from "dashboard/subpages/actions/planesActions";
 import ProgressIndicatorCircular from "common/components/ProgressIndicatorCircular";
 import FetchingErrorPlaceholder from "common/components/FetchingErrorPlaceholder";
 import { applyStyle } from "common/components/DisableOverlay";
 import EditTextInput from "dashboard/subpages/components/EditTextInput";
 import EditButton from "dashboard/subpages/components/EditButton";
-import { push } from "react-router-redux";
 
 const EditPageWrapper = styled.div.attrs({ className: "edit-page-wrapper" })`
   margin: 0;
@@ -54,29 +51,30 @@ class EditPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getPlaneData(this.props.match.params.id);
+    this.props.getObjectData(this.props.match.params.id);
   }
 
   setSaveStatus = () => {
     const { fieldsWithError, editedParameters } = this.state;
 
-    const { planeParameters } = this.props;
+    const { objectParameters } = this.props;
 
     this.setState({
       canSendForm:
         fieldsWithError.length === 0 &&
-        this.isContentChanged(planeParameters, editedParameters)
+        this.isContentChanged(objectParameters, editedParameters)
     });
   };
 
   handleSave = () => {
     let idObj;
 
-    this.props.planeParameters.map(item => {
+    this.props.objectParameters.map(item => {
       if (item.fieldName === "id") idObj = item.value;
+      return;
     });
 
-    this.props.editPlane(idObj, this.state.editedParameters);
+    this.props.editObject(idObj, this.state.editedParameters);
   };
 
   onChange = (event, item) => {
@@ -162,7 +160,14 @@ class EditPage extends Component {
   };
 
   render() {
-    const { isFetching, isError, isEditing, planeParameters } = this.props;
+    const {
+      isFetching,
+      isError,
+      isEditing,
+      objectParameters,
+      pageTitle,
+      pageIcon
+    } = this.props;
     const { canSendForm } = this.state;
 
     if (isError) return <FetchingErrorPlaceholder />;
@@ -170,10 +175,10 @@ class EditPage extends Component {
       <EditPageWithLoading isLoading={isFetching} style={applyStyle(isEditing)}>
         {isEditing && <ProgressIndicatorCircular />}
         <SubpageTitle>
-          <SubpageIcon className="fas fa-plane" />
-          Planes - Edit
+          <SubpageIcon className={pageIcon} />
+          {pageTitle}
         </SubpageTitle>
-        {planeParameters.map(item =>
+        {objectParameters.map(item =>
           item.fieldName !== "id" ? (
             <ParameterRow key={item.fieldName}>
               <ParmeterName>{this.unCamelize(item.fieldName)}</ParmeterName>
@@ -204,26 +209,15 @@ class EditPage extends Component {
 }
 
 EditPage.propTypes = {
-  editPlane: PropTypes.func.isRequired,
-  getPlaneData: PropTypes.func.isRequired,
+  editObject: PropTypes.func.isRequired,
+  getObjectData: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
-  planeParameters: PropTypes.array.isRequired
+  objectParameters: PropTypes.array.isRequired,
+  pageTitle: PropTypes.string.isRequired,
+  pageIcon: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({
-  isFetching: state.subpages.planes.edit.isFetching,
-  isError: state.subpages.planes.edit.isError,
-  planeParameters: state.subpages.planes.edit.data,
-  isEditing: state.subpages.planes.edit.isEditing
-});
-
-const mapDispatchToProps = dispatch => ({
-  editPlane: (planeId, planeData) => dispatch(planeEdit(planeId, planeData)),
-  getPlaneData: planeId => dispatch(planeById(planeId)),
-  handleCancel: () => dispatch(push(`/admin/planes/`))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditPage);
+export default EditPage;

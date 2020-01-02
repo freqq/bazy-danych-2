@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const DataGridCellWrapper = styled.div.attrs({ className: "data-grid-cell" })`
+const DataGridCellWrapper = styled.div.attrs({ className: "data-grid-cell-mutable" })`
   border-right: 1px solid #edf2f4;
   padding: 10px;
 

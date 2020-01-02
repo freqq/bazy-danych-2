@@ -80,11 +80,6 @@ export const ActionButton = styled.button.attrs({ className: "action-button" })`
 `;
 
 class DataGrid extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   camelize = string =>
     string
       .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
@@ -109,14 +104,12 @@ class DataGrid extends Component {
         ) : (
           this.props.rowData.map(item => (
             <DataGridRow key={item}>
-              <DataGridCellMutable
-                value={item.planeModel}
-                onClick={() => this.props.onEdit(item.id)}
-              />
-              <DataGridCellMutable
-                value={item.seatsCount}
-                onClick={() => this.props.onEdit(item.id)}
-              />
+              {Object.keys(item).forEach(key => (
+                <DataGridCellMutable
+                  value={item[key]}
+                  onClick={() => this.props.onEdit(item.id)}
+                />
+              ))}
               <DataGridCell>
                 <ActionButton
                   className="far fa-trash-alt"

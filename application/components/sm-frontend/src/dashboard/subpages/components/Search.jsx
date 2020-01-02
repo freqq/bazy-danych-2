@@ -25,7 +25,7 @@ class Search extends Component {
 
   filterData = event => {
     this.setState({ searchInput: event.target.value }, () => {
-      this.props.searchPlane(this.state.searchInput);
+      this.props.searchObjects(this.state.searchInput);
     });
   };
 
@@ -42,7 +42,7 @@ class Search extends Component {
 
 Search.propTypes = {
   rowData: PropTypes.array.isRequired,
-  searchPlane: PropTypes.func.isRequired
+  searchObjects: PropTypes.func.isRequired
 };
 
 export default Search;

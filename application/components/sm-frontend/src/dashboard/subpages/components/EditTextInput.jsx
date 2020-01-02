@@ -52,8 +52,6 @@ class EditTextInput extends Component {
 
   render() {
     const {
-      value,
-      onChange,
       placeholder,
       name,
       isError,
