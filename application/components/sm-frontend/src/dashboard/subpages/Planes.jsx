@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DataGrid from "dashboard/common/DataGrid";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import styled from "styled-components";
 import withLoading, { ProgIndSize } from "common/utils/withLoading";
 import FetchingErrorPlaceholder from "common/components/FetchingErrorPlaceholder";
@@ -13,7 +14,8 @@ import {
   planesGet,
   planeEdit,
   planeAdd,
-  planeSearch
+  planeSearch,
+  planesSort
 } from "dashboard/subpages/actions/planesActions";
 
 const PlanesSupbage = styled.div.attrs({ className: "dashbaord-subpage" })`
@@ -72,8 +74,9 @@ class Planes extends Component {
           columnHeaders={columnHeaders}
           onDelete={this.props.removePlane}
           onAdd={this.props.addPlane}
-          onEdit={this.editPlane}
+          onEdit={this.props.planeEdit}
           rowData={searchData}
+          onSort={this.props.sortPlanes}
         />
       </PlanesSupbageWithLoading>
     );
@@ -85,9 +88,10 @@ Planes.propTypes = {
   searchData: PropTypes.array.isRequired,
   getPlanes: PropTypes.func.isRequired,
   removePlane: PropTypes.func.isRequired,
-  editPlane: PropTypes.func.isRequired,
+  planeEdit: PropTypes.func.isRequired,
   addPlane: PropTypes.func.isRequired,
   searchPlane: PropTypes.func.isRequired,
+  sortPlanes: PropTypes.func.isRequired,
   isError: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   planeRemoving: PropTypes.bool.isRequired,
@@ -106,9 +110,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getPlanes: () => dispatch(planesGet()),
   removePlane: planeId => dispatch(planeRemove(planeId)),
-  editPlane: planeData => dispatch(planeEdit(planeData)),
   addPlane: planeData => dispatch(planeAdd(planeData)),
-  searchPlane: searchData => dispatch(planeSearch(searchData))
+  searchPlane: searchData => dispatch(planeSearch(searchData)),
+  sortPlanes: headerName => dispatch(planesSort(headerName)),
+  planeEdit: planeId => dispatch(push(`/admin/planes/${planeId}`))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Planes);

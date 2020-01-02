@@ -2,6 +2,7 @@ package com.freq.airline.controller;
 
 import com.freq.airline.model.Plane;
 import com.freq.airline.payload.PlaneRequest;
+import com.freq.airline.payload.PlaneResponse;
 import com.freq.airline.service.PlanesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class PlanesController {
         return planesService.getPlanes();
     }
 
+    @GetMapping("/{id}")
+    public PlaneResponse getPlane(@PathVariable("id") Long planeId){
+        return planesService.getPlaneById(planeId);
+    }
+
     @PostMapping("/remove/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> removePlane(@PathVariable("id") Long planeId){
@@ -37,5 +43,4 @@ public class PlanesController {
     public ResponseEntity<?> addPlane(@Valid @RequestBody PlaneRequest planeRequest){
         return planesService.addPlane(planeRequest);
     }
-
 }

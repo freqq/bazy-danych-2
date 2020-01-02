@@ -25,6 +25,16 @@ export const DataGridRow = styled.li.attrs({ className: "data-grid-row" })`
     background: #f6f8f9;
     font-size: 15px;
   }
+
+  &:hover {
+    background: #fafafa;
+    cursor: pointer;
+  }
+
+  &:last-child:hover {
+    cursor: auto;
+    background: #ffffff;
+  }
 `;
 
 export const DataGridCell = styled.div.attrs({ className: "data-grid-cell" })`
@@ -33,6 +43,10 @@ export const DataGridCell = styled.div.attrs({ className: "data-grid-cell" })`
 
   &:nth-child(3n) {
     border: none;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -71,19 +85,30 @@ class DataGrid extends Component {
     this.state = {};
   }
 
+  camelize = string =>
+    string
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+      })
+      .replace(/\s+/g, "");
+
   render() {
     return (
       <DataGridWrapper>
         <DataGridRow>
           {this.props.columnHeaders.map(item => (
-            <DataGridCell>{item}</DataGridCell>
+            <DataGridCell
+              onClick={() => this.props.onSort(this.camelize(item))}
+            >
+              {item}
+            </DataGridCell>
           ))}
         </DataGridRow>
-        {this.props.rowData.length == 0 ? (
+        {this.props.rowData.length === 0 ? (
           <NoData>No data.</NoData>
         ) : (
           this.props.rowData.map(item => (
-            <DataGridRow>
+            <DataGridRow key={item} onClick={() => this.props.onEdit(item.id)}>
               <DataGridCellMutable value={item.planeModel} />
               <DataGridCellMutable value={item.seatsCount} />
               <DataGridCell>
@@ -109,7 +134,8 @@ DataGrid.propTypes = {
   rowData: PropTypes.array.isRequired,
   onEdit: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  onSort: PropTypes.func.isRequired
 };
 
 export default DataGrid;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import getPath from "common/utils/path";
 import makeLoadable from "common/utils/loadable";
 import NotFoundPage from "common/components/NotFoundPage";

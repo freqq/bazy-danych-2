@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 public class Plane {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long id;
 
     @NotNull
-    private String planeModel;
+    public String planeModel;
 
-    private int seatsCount;
+    public int seatsCount;
 }

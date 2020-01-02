@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import TextInput from "dashboard/subpages/components/TextInput";
 
 const DataGridCellWrapper = styled.div.attrs({ className: "data-grid-cell" })`
   border-right: 1px solid #edf2f4;
@@ -13,29 +12,20 @@ const DataGridCellWrapper = styled.div.attrs({ className: "data-grid-cell" })`
 `;
 
 class DataGridCellMutable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isInput: false
-    };
-  }
-
-  onClick = () => {
-    this.setState({ isInput: !this.state.isInput });
-  };
-
   render() {
-    const { value } = this.props;
+    const { value, onClick } = this.props;
+
     return (
-      <DataGridCellWrapper onDoubleClick={this.onClick}>
-        {this.state.isInput ? <TextInput value={value} /> : value}
+      <DataGridCellWrapper onClick={onClick}>
+        {value}
       </DataGridCellWrapper>
     );
   }
 }
 
 DataGridCellMutable.propTypes = {
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
+  onClick: PropTypes.string.isRequired
 };
 
 export default DataGridCellMutable;

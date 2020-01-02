@@ -1,5 +1,5 @@
 import loginRequest from "start-page/handlers/startPageHandler";
-import { replace, push } from "react-router-redux";
+import { push } from "react-router-redux";
 
 export const LOGIN_FETCHING = "LOGIN_FETCHING";
 export const LOGIN_OK = "LOGIN_OK";

@@ -1,5 +1,6 @@
 import {
   fetchPlanes,
+  fetchPlaneById,
   removePlaneById,
   addPlane
 } from "dashboard/subpages/handlers/planesHandlers";
@@ -14,6 +15,10 @@ export const PLANE_ADD_FETCHING = "PLANE_ADD_FETCHING";
 export const PLANE_ADD_OK = "PLANE_ADD_OK";
 export const PLANE_ADD_FAIL = "PLANE_ADD_FAIL";
 export const PLANE_SEARCHING = "PLANE_SEARCHING";
+export const PLANE_SORTING = "PLANE_SORTING";
+export const PLANE_GET_FETCHING = "PLANE_GET_FETCHING";
+export const PLANE_GET_FAIL = "PLANE_GET_FAIL";
+export const PLANE_GET_OK = "PLANE_GET_OK";
 
 export const makePlanesFetching = () => ({
   type: PLANES_FETCHING
@@ -52,8 +57,26 @@ export const makePlanesAddFail = () => ({
   type: PLANE_ADD_FAIL
 });
 
+export const makePlaneGetFetching = () => ({
+  type: PLANE_GET_FETCHING
+});
+
+export const makePlaneGetOk = data => ({
+  type: PLANE_GET_OK,
+  payload: data
+});
+
+export const makePlaneGetFail = () => ({
+  type: PLANE_GET_FAIL
+});
+
 export const makeSearching = data => ({
   type: PLANE_SEARCHING,
+  payload: data
+});
+
+export const makeSorting = data => ({
+  type: PLANE_SORTING,
   payload: data
 });
 
@@ -105,7 +128,25 @@ const planeSearchFunction = (searchData, dispatch) => {
   dispatch(makeSearching(searchData));
 };
 
+const planesSortFunction = (headerName, dispatch) => {
+  dispatch(makeSorting(headerName));
+};
+
+const getPlaneByIfFunction = (planeId, dispatch) => {
+  dispatch(makePlaneGetFetching());
+
+  return fetchPlaneById(planeId)
+    .then(res => {
+      dispatch(makePlaneGetOk(res.data));
+    })
+    .catch(() => {
+      dispatch(makePlaneGetFail());
+    });
+};
+
 export const planesGet = () => dispatch => getPlanesFunction(dispatch);
+export const planeById = planeId => dispatch =>
+  getPlaneByIfFunction(planeId, dispatch);
 export const planeAdd = planeData => dispatch =>
   planeAddFunction(planeData, dispatch);
 export const planeEdit = planeData => dispatch =>
@@ -114,3 +155,5 @@ export const planeRemove = planeId => dispatch =>
   planeRemoveFunction(planeId, dispatch);
 export const planeSearch = searchData => dispatch =>
   planeSearchFunction(searchData, dispatch);
+export const planesSort = headerName => dispatch =>
+  planesSortFunction(headerName, dispatch);

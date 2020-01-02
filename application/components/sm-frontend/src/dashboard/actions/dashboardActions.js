@@ -1,5 +1,5 @@
 import { getCurrentUser } from "dashboard/handlers/dashboardHandlers";
-import { replace, push } from "react-router-redux";
+import { push } from "react-router-redux";
 
 export const USER_FETCHING = "USER_FETCHING";
 export const USER_OK = "USER_OK";

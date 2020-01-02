@@ -18,8 +18,6 @@ class Dashboard extends Component {
   render() {
     const {
       userName,
-      firstName,
-      lastName,
       isLoading,
       logoutCurrentUser
     } = this.props;

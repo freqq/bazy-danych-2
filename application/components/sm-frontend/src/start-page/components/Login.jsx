@@ -120,7 +120,8 @@ class Login extends Component {
   keyPressed = event => {
     if (
       event.key === "Enter" &&
-      this.state.passwordValue.length > 0 && this.state.loginValue.length > 0
+      this.state.passwordValue.length > 0 &&
+      this.state.loginValue.length > 0
     )
       this.handleLogin();
   };
@@ -156,7 +157,11 @@ class Login extends Component {
           Don't remember your password?
         </DontRememeber>
         <LoginButton disabled={!canSendForm} onClick={this.handleLogin}>
-          {loginFetching ? <img src={buttonProgressAnimation} /> : "Log in"}
+          {loginFetching ? (
+            <img src={buttonProgressAnimation} alt="buttonProgressAnimation" />
+          ) : (
+            "Log in"
+          )}
         </LoginButton>
         <ProsList>
           <ProsListItem>

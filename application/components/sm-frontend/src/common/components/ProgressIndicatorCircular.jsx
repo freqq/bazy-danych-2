@@ -11,7 +11,10 @@ const CenteringWrapper = styled.div`
 const ProgressIndicatorCircular = () => {
   return (
     <CenteringWrapper>
-      <img src={ProgressIndicatorCircularImage} />
+      <img
+        src={ProgressIndicatorCircularImage}
+        alt="ProgressIndicatorCircularImage"
+      />
     </CenteringWrapper>
   );
 };

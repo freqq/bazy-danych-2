@@ -8,7 +8,11 @@ import {
   PLANE_ADD_FETCHING,
   PLANE_ADD_OK,
   PLANE_ADD_FAIL,
-  PLANE_SEARCHING
+  PLANE_SEARCHING,
+  PLANE_SORTING,
+  PLANE_GET_FETCHING,
+  PLANE_GET_FAIL,
+  PLANE_GET_OK
 } from "dashboard/subpages/actions/planesActions";
 
 export const INITIAL_STATE = {
@@ -23,6 +27,12 @@ export const INITIAL_STATE = {
   add: {
     isError: false,
     isFetching: false
+  },
+  edit: {
+    data: [],
+    isError: false,
+    isFetching: false,
+    isEditing: false
   }
 };
 
@@ -98,6 +108,32 @@ export default (state = INITIAL_STATE, { type, payload }) => {
           isError: true
         }
       };
+    case PLANE_GET_OK:
+      return {
+        ...state,
+        edit: {
+          data: payload,
+          isFetching: false,
+          isError: false
+        }
+      };
+    case PLANE_GET_FETCHING:
+      return {
+        ...state,
+        edit: {
+          data: [],
+          isFetching: true,
+          isError: false
+        }
+      };
+    case PLANE_GET_FAIL:
+      return {
+        ...state,
+        edit: {
+          isFetching: false,
+          isError: true
+        }
+      };
     case PLANE_SEARCHING:
       return {
         ...state,
@@ -107,6 +143,18 @@ export default (state = INITIAL_STATE, { type, payload }) => {
               .toLowerCase()
               .indexOf(payload.toLowerCase()) !== -1
         )
+      };
+    case PLANE_SORTING:
+      var sortArray = state.searchData;
+      var copy = [...sortArray];
+      return {
+        ...state,
+        searchData: copy.sort((a, b) => {
+          var x = a[payload];
+          var y = b[payload];
+          console.log(x, y);
+          return x < y ? -1 : x > y ? 1 : 0;
+        })
       };
     default:
       return state;
