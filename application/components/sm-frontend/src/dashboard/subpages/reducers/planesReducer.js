@@ -12,7 +12,10 @@ import {
   PLANE_SORTING,
   PLANE_GET_FETCHING,
   PLANE_GET_FAIL,
-  PLANE_GET_OK
+  PLANE_GET_OK,
+  PLANE_EDIT_FETCHING,
+  PLANE_EDIT_FAIL,
+  PLANE_EDIT_OK
 } from "dashboard/subpages/actions/planesActions";
 
 export const INITIAL_STATE = {
@@ -32,7 +35,8 @@ export const INITIAL_STATE = {
     data: [],
     isError: false,
     isFetching: false,
-    isEditing: false
+    isEditing: false,
+    isEditingFail: false
   }
 };
 
@@ -143,6 +147,33 @@ export default (state = INITIAL_STATE, { type, payload }) => {
               .toLowerCase()
               .indexOf(payload.toLowerCase()) !== -1
         )
+      };
+    case PLANE_EDIT_FETCHING:
+      return {
+        ...state,
+        edit: {
+          ...state.edit,
+          isEditing: true,
+          isEditingFail: false
+        }
+      };
+    case PLANE_EDIT_OK:
+      return {
+        ...state,
+        edit: {
+          ...state.edit,
+          isEditing: false,
+          isEditingFail: false
+        }
+      };
+    case PLANE_EDIT_FAIL:
+      return {
+        ...state,
+        edit: {
+          ...state.edit,
+          isEditing: false,
+          isEditingFail: true
+        }
       };
     case PLANE_SORTING:
       var sortArray = state.searchData;

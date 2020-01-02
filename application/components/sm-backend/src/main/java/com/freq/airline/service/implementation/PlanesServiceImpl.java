@@ -1,6 +1,7 @@
 package com.freq.airline.service.implementation;
 
 import com.freq.airline.model.Plane;
+import com.freq.airline.payload.PlaneEditRequest;
 import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.payload.PlaneResponse;
 import com.freq.airline.repository.PlanesRepository;
@@ -48,9 +49,23 @@ public class PlanesServiceImpl implements PlanesService {
 
     public PlaneResponse getPlaneById(Long planeId) {
         Optional<Plane> plane = planesRepository.findById(planeId);
-        if(plane.isPresent())
-            return new PlaneResponse(plane.get());
-        return null;
+        return plane.isPresent() ? new PlaneResponse(plane.get()) : null;
     }
 
+    public ResponseEntity<?> editPlane(Long planeId, PlaneEditRequest planeEditRequest) {
+        Optional<Plane> plane = planesRepository.findById(planeId);
+
+        if(plane.isPresent()){
+            if(planeEditRequest.getPlaneModel() != null)
+                plane.get().setPlaneModel(planeEditRequest.getPlaneModel());
+            if(planeEditRequest.getSeatsCount() != 0)
+                plane.get().setSeatsCount(planeEditRequest.getSeatsCount());
+
+            planesRepository.save(plane.get());
+
+            return new ResponseEntity<>("Plane with given id edited correctly.", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Plane with given id doesnt exists.", HttpStatus.NOT_FOUND);
+    }
 }

@@ -2,8 +2,10 @@ import {
   fetchPlanes,
   fetchPlaneById,
   removePlaneById,
-  addPlane
+  addPlane,
+  editPlaneById
 } from "dashboard/subpages/handlers/planesHandlers";
+import { push } from "react-router-redux";
 
 export const PLANES_FETCHING = "PLANES_FETCHING";
 export const PLANES_OK = "PLANES_OK";
@@ -19,6 +21,9 @@ export const PLANE_SORTING = "PLANE_SORTING";
 export const PLANE_GET_FETCHING = "PLANE_GET_FETCHING";
 export const PLANE_GET_FAIL = "PLANE_GET_FAIL";
 export const PLANE_GET_OK = "PLANE_GET_OK";
+export const PLANE_EDIT_FETCHING = "PLANE_EDIT_FETCHING";
+export const PLANE_EDIT_FAIL = "PLANE_EDIT_FAIL";
+export const PLANE_EDIT_OK = "PLANE_EDIT_OK";
 
 export const makePlanesFetching = () => ({
   type: PLANES_FETCHING
@@ -31,6 +36,18 @@ export const makePlanesOk = data => ({
 
 export const makePlanesFail = () => ({
   type: PLANES_FAIL
+});
+
+export const makePlaneEditFetching = () => ({
+  type: PLANE_EDIT_FETCHING
+});
+
+export const makePlaneEditOk = () => ({
+  type: PLANE_EDIT_OK
+});
+
+export const makePlaneEditFail = () => ({
+  type: PLANE_EDIT_FAIL
 });
 
 export const makePlanesRemoveFetching = () => ({
@@ -63,7 +80,7 @@ export const makePlaneGetFetching = () => ({
 
 export const makePlaneGetOk = data => ({
   type: PLANE_GET_OK,
-  payload: data
+  payload: data.parameterWithTypeList
 });
 
 export const makePlaneGetFail = () => ({
@@ -107,7 +124,18 @@ const planeAddFunction = (planeData, dispatch) => {
     });
 };
 
-const planeEditFunction = (planeData, dispatch) => {};
+const planeEditFunction = (planeId, planeData, dispatch) => {
+  dispatch(makePlaneEditFetching());
+
+  return editPlaneById(planeId, planeData)
+    .then(() => {
+      dispatch(makePlaneEditOk());
+      dispatch(push("/admin/planes"));
+    })
+    .catch(() => {
+      dispatch(makePlaneEditFail());
+    });
+};
 
 const planeRemoveFunction = (planeId, dispatch) => {
   dispatch(makePlanesRemoveFetching());
@@ -149,8 +177,8 @@ export const planeById = planeId => dispatch =>
   getPlaneByIfFunction(planeId, dispatch);
 export const planeAdd = planeData => dispatch =>
   planeAddFunction(planeData, dispatch);
-export const planeEdit = planeData => dispatch =>
-  planeEditFunction(planeData, dispatch);
+export const planeEdit = (planeId, planeData) => dispatch =>
+  planeEditFunction(planeId, planeData, dispatch);
 export const planeRemove = planeId => dispatch =>
   planeRemoveFunction(planeId, dispatch);
 export const planeSearch = searchData => dispatch =>

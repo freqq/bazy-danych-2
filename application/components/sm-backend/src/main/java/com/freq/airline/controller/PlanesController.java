@@ -1,6 +1,7 @@
 package com.freq.airline.controller;
 
 import com.freq.airline.model.Plane;
+import com.freq.airline.payload.PlaneEditRequest;
 import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.payload.PlaneResponse;
 import com.freq.airline.service.PlanesService;
@@ -30,6 +31,11 @@ public class PlanesController {
     @GetMapping("/{id}")
     public PlaneResponse getPlane(@PathVariable("id") Long planeId){
         return planesService.getPlaneById(planeId);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<?> editPlane(@PathVariable("id") Long planeId, @Valid @RequestBody PlaneEditRequest planeEditRequest){
+        return planesService.editPlane(planeId, planeEditRequest);
     }
 
     @PostMapping("/remove/{id}")
