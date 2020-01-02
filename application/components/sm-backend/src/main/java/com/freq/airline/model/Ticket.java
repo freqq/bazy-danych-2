@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long id;
 
-    private int price;
+    public int price;
 
     @NotNull
-    private String seatNumber;
+    public String seatNumber;
 }

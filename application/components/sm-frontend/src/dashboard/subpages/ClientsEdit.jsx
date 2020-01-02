@@ -11,7 +11,7 @@ import { push } from "react-router-redux";
 
 const EditWithLoading = withLoading(EditPage, ProgIndSize.XX_LARGE);
 
-class CliendsEdit extends Component {
+class ClientsEdit extends Component {
   render() {
     const {
       isFetching,
@@ -37,7 +37,7 @@ class CliendsEdit extends Component {
   }
 }
 
-CliendsEdit.propTypes = {
+ClientsEdit.propTypes = {
   editClient: PropTypes.func.isRequired,
   getClientData: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
@@ -61,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
   handleCancel: () => dispatch(push(`/admin/clients/`))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CliendsEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(ClientsEdit);

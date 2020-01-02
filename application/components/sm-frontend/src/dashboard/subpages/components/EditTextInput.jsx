@@ -13,7 +13,7 @@ const EditTextInputWrapper = styled.input.attrs({ className: "input-wrapper" })`
   border: 1px solid #cecece;
   border-radius: 3px;
   padding: 5px;
-  width: 90%;
+  width: 100%;
   display: block;
   margin: 0 auto;
   font-weight: 100;
@@ -29,7 +29,7 @@ const EditInputErrorText = styled.p.attrs({ className: "input-error-text" })`
   color: red;
   position: absolute;
   top: -15px;
-  left: 4.5%;
+  left: 0;
   font-size: 11px;
   margin: 0;
   padding: 0;
