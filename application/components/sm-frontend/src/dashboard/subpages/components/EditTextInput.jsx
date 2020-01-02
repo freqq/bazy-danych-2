@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Checkbox from "dashboard/subpages/components/Checkbox";
 import PropTypes from "prop-types";
 
 const EditInputWrapper = styled.div.attrs({ className: "edit-input-wrapper" })`
@@ -38,9 +39,13 @@ class EditTextInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputContent: this.props.value
+      inputContent: this.props.name.toLowerCase().includes("birthday")
+        ? this.trimDate(this.props.value)
+        : this.props.value
     };
   }
+
+  trimDate = date => date.split("T")[0];
 
   onInputChange = event => {
     this.setState({
@@ -50,22 +55,33 @@ class EditTextInput extends Component {
     this.props.onChange(event);
   };
 
+  onCheckboxChange = event => {
+    this.setState({
+      inputContent: event.target.checked
+    });
+
+    this.props.onChange(event);
+  };
+
   render() {
-    const {
-      placeholder,
-      name,
-      isError,
-      errorText
-    } = this.props;
+    const { placeholder, name, isError, errorText } = this.props;
     return (
       <EditInputWrapper>
-        <EditTextInputWrapper
-          value={this.state.inputContent}
-          onChange={this.onInputChange}
-          placeholder={placeholder}
-          name={name}
-          style={isError ? { border: "1px solid red" } : {}}
-        />
+        {name.toLowerCase().includes("discount") ? (
+          <Checkbox
+            checked={this.state.inputContent}
+            onChange={this.onCheckboxChange}
+            name={name}
+          />
+        ) : (
+          <EditTextInputWrapper
+            value={this.state.inputContent}
+            onChange={this.onInputChange}
+            placeholder={placeholder}
+            name={name}
+            style={isError ? { border: "1px solid red" } : {}}
+          />
+        )}
         <EditInputErrorText>{errorText}</EditInputErrorText>
       </EditInputWrapper>
     );

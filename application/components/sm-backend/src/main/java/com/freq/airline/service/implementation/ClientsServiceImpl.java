@@ -93,8 +93,8 @@ public class ClientsServiceImpl implements ClientsService {
                 client.get().setBirthday(planeEditRequest.getBirthday());
             if (planeEditRequest.getEmail() != null)
                 client.get().setEmail(planeEditRequest.getEmail());
-            if (planeEditRequest.getIDNumber() != null)
-                client.get().setIDNumber(planeEditRequest.getIDNumber());
+            if (planeEditRequest.getIdnumber() != null)
+                client.get().setIDNumber(planeEditRequest.getIdnumber());
 
             client.get().setDiscount(planeEditRequest.isDiscount());
 

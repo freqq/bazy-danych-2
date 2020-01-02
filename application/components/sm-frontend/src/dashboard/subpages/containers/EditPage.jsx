@@ -84,68 +84,125 @@ class EditPage extends Component {
     let errorText = "";
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
-    this.setState(
-      {
-        editedParameters: {
-          ...this.state.editedParameters,
-          [fieldName]: fieldValue
-        }
-      },
-      () => {
-        if (fieldValue.length === 0) {
-          isError = true;
-          errorText = "You can't leave this field empty!";
-        } else if (item.type === "integer" && !this.isNumeric(fieldValue)) {
-          isError = true;
-          errorText = "Value must a type of integer!";
-        } else {
-          isError = false;
-          errorText = "";
-        }
+    const fieldCheckbox = event.target.checked;
 
-        if (isError)
-          this.setState(
-            {
-              fieldsWithError: [...this.state.fieldsWithError, fieldName]
-            },
-            () => {
-              this.setState(
-                {
-                  [fieldName + "IsError"]: isError,
-                  [fieldName + "ErrorText"]: errorText
-                },
-                () => {
-                  this.setSaveStatus();
-                }
-              );
-            }
-          );
-        else
-          this.setState(
-            {
-              fieldsWithError: this.state.fieldsWithError.filter(function(
-                event
-              ) {
-                return event !== fieldName;
-              })
-            },
-            () => {
-              this.setState(
-                {
-                  [fieldName + "IsError"]: isError,
-                  [fieldName + "ErrorText"]: errorText
-                },
-                () => {
-                  this.setSaveStatus();
-                }
-              );
-            }
-          );
-      }
-    );
+    if (fieldName.toLowerCase().includes("discount")) {
+      this.setState(
+        {
+          editedParameters: {
+            ...this.state.editedParameters,
+            discount: fieldCheckbox
+          }
+        },
+        () => {
+          this.setSaveStatus();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          editedParameters: {
+            ...this.state.editedParameters,
+            [fieldName.toLowerCase().includes("idnumber")
+              ? "idnumber"
+              : fieldName]: fieldValue
+          }
+        },
+        () => {
+          if (fieldValue.length === 0) {
+            isError = true;
+            errorText = "You can't leave this field empty!";
+          } else if (item.type === "integer" && !this.isNumeric(fieldValue)) {
+            isError = true;
+            errorText = "Value must a type of integer!";
+          } else if (
+            item.type === "timestamp" &&
+            !this.isTimestamp(fieldValue)
+          ) {
+            isError = true;
+            errorText = "Given value is not a date (yyyy-MM-dd)!";
+          } else if (
+            fieldName.toLowerCase().includes("pesel") &&
+            !this.isPesel(fieldValue)
+          ) {
+            isError = true;
+            errorText = "Not a valid PESEL value!";
+          } else if (
+            fieldName.toLowerCase().includes("email") &&
+            !this.isEmail(fieldValue)
+          ) {
+            isError = true;
+            errorText = "Not a valid email value!";
+          } else {
+            isError = false;
+            errorText = "";
+          }
+
+          if (isError)
+            this.setState(
+              {
+                fieldsWithError: [...this.state.fieldsWithError, fieldName]
+              },
+              () => {
+                this.setState(
+                  {
+                    [fieldName + "IsError"]: isError,
+                    [fieldName + "ErrorText"]: errorText
+                  },
+                  () => {
+                    this.setSaveStatus();
+                  }
+                );
+              }
+            );
+          else
+            this.setState(
+              {
+                fieldsWithError: this.state.fieldsWithError.filter(function(
+                  event
+                ) {
+                  return event !== fieldName;
+                })
+              },
+              () => {
+                this.setState(
+                  {
+                    [fieldName + "IsError"]: isError,
+                    [fieldName + "ErrorText"]: errorText
+                  },
+                  () => {
+                    this.setSaveStatus();
+                  }
+                );
+              }
+            );
+        }
+      );
+    }
   };
 
   isNumeric = number => /^-{0,1}\d+$/.test(number);
+
+  isEmail = email =>
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
+      email
+    );
+
+  isPesel = pesel => {
+    if (typeof pesel !== "string") return false;
+
+    let weight = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
+    let sum = 0;
+    let controlNumber = parseInt(pesel.substring(10, 11));
+    for (let i = 0; i < weight.length; i++) {
+      sum += parseInt(pesel.substring(i, i + 1)) * weight[i];
+    }
+    sum = sum % 10;
+    return 10 - sum === controlNumber;
+  };
+
+  isTimestamp = date =>
+    /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/.test(date);
 
   isContentChanged = (originalParameters, inputContent) =>
     Object.keys(inputContent).some(

@@ -12,5 +12,5 @@ public class ClientEditRequest {
     private Date birthday;
     private boolean isDiscount;
     private String email;
-    private String iDNumber;
+    private String idnumber;
 }
