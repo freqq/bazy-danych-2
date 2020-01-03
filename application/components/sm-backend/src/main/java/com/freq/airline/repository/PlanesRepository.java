@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface PlanesRepository extends JpaRepository<Plane, Long> {
     List<Plane> findAll();
-    Optional<Plane> findById(int planeId);
+    Optional<Plane> findById(Long planeId);
     Optional<Plane> findByPlaneModel(String planeModel);
     void removeById(Long planeId);
 }

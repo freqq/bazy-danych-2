@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface ClientsRepository extends JpaRepository<Client, Long> {
     List<Client> findAll();
-    Optional<Client> findById(int clientId);
+    Optional<Client> findById(Long clientId);
     void removeById(Long clientId);
 }

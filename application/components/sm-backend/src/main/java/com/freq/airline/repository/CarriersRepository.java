@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CarriersRepository extends JpaRepository<Carrier, Long> {
     List<Carrier> findAll();
-    Optional<Carrier> findById(int carrierId);
+    Optional<Carrier> findById(Long carrierId);
+    Optional<Carrier> findByCarrierName(String carrierName);
     void removeById(Long ticketId);
 }

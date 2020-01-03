@@ -78,4 +78,14 @@ public class CarriersServiceImpl implements CarriersService {
 
         return new ResponseEntity<>("Carrier with given id doesnt exists.", HttpStatus.NOT_FOUND);
     }
+
+    public List<String> getCarrierNames(){
+        List<Carrier> carriers = carriersRepository.findAll();
+        List<String> carrierNames = new ArrayList<>();
+
+        for(Carrier carrier : carriers)
+            carrierNames.add(carrier.getCarrierName());
+
+        return carrierNames;
+    }
 }

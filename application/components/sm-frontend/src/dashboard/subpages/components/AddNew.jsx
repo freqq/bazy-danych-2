@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextInput from "dashboard/subpages/components/TextInput";
 import Checkbox from "dashboard/subpages/components/Checkbox";
+import SelectBox from "dashboard/subpages/components/SelectBox";
 import PropTypes from "prop-types";
 import {
   DataGridCell,
@@ -93,7 +94,23 @@ class AddNew extends Component {
           name={item}
         />
       );
-    else
+    else if (this.camelize(item).toLowerCase() === "carriername") {
+      return (
+        <SelectBox
+          selectItems={this.props.carriersData}
+          onChange={this.onChange}
+          name={item}
+        />
+      );
+    } else if (this.camelize(item).toLowerCase() === "planename") {
+      return (
+        <SelectBox
+          selectItems={this.props.planesData}
+          onChange={this.onChange}
+          name={item}
+        />
+      );
+    } else
       return (
         <TextInput name={item} placeholder={item} onChange={this.onChange} />
       );
@@ -122,7 +139,9 @@ class AddNew extends Component {
 
 AddNew.propTypes = {
   columnHeaders: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  carriersData: PropTypes.array,
+  planesData: PropTypes.array
 };
 
 export default AddNew;

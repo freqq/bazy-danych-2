@@ -36,6 +36,11 @@ public class CarriersController {
         return carriersService.editCarrier(carrierId, carrierEditRequest);
     }
 
+    @GetMapping("/names")
+    public List<String> getCarrierNames(){
+        return carriersService.getCarrierNames();
+    }
+
     @PostMapping("/remove/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> removeCarrier(@PathVariable("id") Long carrierId){

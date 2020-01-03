@@ -38,6 +38,11 @@ public class PlanesController {
         return planesService.editPlane(planeId, planeEditRequest);
     }
 
+    @GetMapping("/names")
+    public List<String> getPlanesNames(){
+        return planesService.getPlanesNames();
+    }
+
     @PostMapping("/remove/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> removePlane(@PathVariable("id") Long planeId){

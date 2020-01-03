@@ -45,7 +45,7 @@ public class ClientsController {
 
     @PostMapping("/")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> addPlane(@Valid @RequestBody ClientRequest clientRequest){
+    public ResponseEntity<?> addClient(@Valid @RequestBody ClientRequest clientRequest){
         return clientsService.addClient(clientRequest);
     }
 }

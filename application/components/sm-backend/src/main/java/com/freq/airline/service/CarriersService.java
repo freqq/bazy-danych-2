@@ -15,4 +15,5 @@ public interface CarriersService {
     ResponseEntity<?> editCarrier(Long carrierId, CarrierEditRequest carrierEditRequest);
     ResponseEntity<?> removeCarrier(Long carrierId);
     ResponseEntity<?> addCarrier(CarrierRequest carrierRequest);
+    List<String> getCarrierNames();
 }

@@ -111,7 +111,10 @@ class DataGrid extends Component {
                         onClick={() => this.props.onEdit(item.id)}
                       />
                     );
-                  if (key.toLowerCase().includes("birthday"))
+                  if (
+                    key.toLowerCase().includes("birthday") ||
+                    key.toLowerCase() === "flightdate"
+                  )
                     return (
                       <DateGridCell
                         value={item[key]}
@@ -138,6 +141,8 @@ class DataGrid extends Component {
         <AddNew
           columnHeaders={this.props.columnHeaders}
           onClick={this.props.onAdd}
+          carriersData={this.props.carriersData}
+          planesData={this.props.planesData}
         />
       </DataGridWrapper>
     );
@@ -150,7 +155,9 @@ DataGrid.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onSort: PropTypes.func.isRequired
+  onSort: PropTypes.func.isRequired,
+  carriersData: PropTypes.array,
+  planesData: PropTypes.array
 };
 
 export default DataGrid;

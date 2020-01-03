@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface TicketsRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAll();
-    Optional<Ticket> findById(int ticketId);
+    Optional<Ticket> findById(Long ticketId);
     void removeById(Long ticketId);
 }

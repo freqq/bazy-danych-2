@@ -13,6 +13,8 @@ export const TICKETS_PATH = getPath("/admin/tickets");
 export const TICKETS_EDIT_PATH = getPath("/admin/tickets/:id");
 export const CARRIERS_PATH = getPath("/admin/carriers");
 export const CARRIERS_EDIT_PATH = getPath("/admin/carriers/:id");
+export const FLIGHTS_PATH = getPath("/admin/flights");
+export const FLIGHTS_EDIT_PATH = getPath("/admin/flights/:id");
 
 export const LoadableDashbaord = makeLoadable(() =>
   import("dashboard/subpages/Dashboard")
@@ -34,6 +36,10 @@ export const LoadableCarriers = makeLoadable(() =>
   import("dashboard/subpages/Carriers")
 );
 
+export const LoadableFlights = makeLoadable(() =>
+  import("dashboard/subpages/Flights")
+);
+
 export const LoadablePlanesEdit = makeLoadable(() =>
   import("dashboard/subpages/PlaneEdit")
 );
@@ -50,6 +56,10 @@ export const LoadableCarriersEdit = makeLoadable(() =>
   import("dashboard/subpages/CarriersEdit")
 );
 
+export const LoadableFlightsEdit = makeLoadable(() =>
+  import("dashboard/subpages/FlightsEdit")
+);
+
 const DashboardRouter = () => (
   <Switch>
     <Route exact path={DASHBOARD_PATH} component={LoadableDashbaord} />
@@ -62,6 +72,8 @@ const DashboardRouter = () => (
     <Route exact path={CLIENTS_EDIT_PATH} component={LoadableClientsEdit} />
     <Route exact path={CARRIERS_PATH} component={LoadableCarriers} />
     <Route exact path={CARRIERS_EDIT_PATH} component={LoadableCarriersEdit} />
+    <Route exact path={FLIGHTS_PATH} component={LoadableFlights} />
+    <Route exact path={FLIGHTS_EDIT_PATH} component={LoadableFlightsEdit} />
     <Route component={NotFoundPage} />
   </Switch>
 );

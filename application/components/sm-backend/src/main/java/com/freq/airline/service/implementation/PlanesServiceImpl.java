@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,4 +69,15 @@ public class PlanesServiceImpl implements PlanesService {
 
         return new ResponseEntity<>("Plane with given id doesnt exists.", HttpStatus.NOT_FOUND);
     }
+
+    public List<String> getPlanesNames() {
+        List<Plane> planes = planesRepository.findAll();
+        List<String> planesNames = new ArrayList<>();
+
+        for(Plane plane : planes)
+            planesNames.add(plane.getPlaneModel());
+
+        return planesNames;
+    }
+
 }

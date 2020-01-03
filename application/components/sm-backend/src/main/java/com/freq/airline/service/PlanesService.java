@@ -18,4 +18,5 @@ public interface PlanesService {
     ResponseEntity<?> editPlane(Long planeId, PlaneEditRequest planeEditRequest);
     ResponseEntity<?> removePlane(Long planeId);
     ResponseEntity<?> addPlane(PlaneRequest planeRequest);
+    List<String> getPlanesNames();
 }

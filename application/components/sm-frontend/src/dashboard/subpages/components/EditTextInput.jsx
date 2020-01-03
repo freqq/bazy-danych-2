@@ -39,11 +39,23 @@ class EditTextInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputContent: this.props.name.toLowerCase().includes("birthday")
+      inputContent: this.props.name.toLowerCase().includes(
+        "birthday" ||
+          this.camelize(this.props.name)
+            .toLowerCase()
+            .includes("flight")
+      )
         ? this.trimDate(this.props.value)
         : this.props.value
     };
   }
+
+  camelize = string =>
+    string
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+      })
+      .replace(/\s+/g, "");
 
   trimDate = date => date.split("T")[0];
 

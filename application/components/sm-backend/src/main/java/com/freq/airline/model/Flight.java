@@ -12,22 +12,22 @@ import java.util.Date;
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long id;
 
     @NotNull
-    private String destinationPlace;
+    public String destinationPlace;
 
     @NotNull
-    private String startPlace;
+    public String startPlace;
 
     @NotNull
-    private Date flightDate;
+    public Date flightDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "carrier_id", nullable = false)
-    private Carrier carrier;
+    public Carrier carrier;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "plane_id", nullable = false)
-    private Plane plane;
+    public Plane plane;
 }
