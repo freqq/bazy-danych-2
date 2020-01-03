@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Checkbox from "dashboard/subpages/components/Checkbox";
+import SelectBox from "dashboard/subpages/components/SelectBox";
 import PropTypes from "prop-types";
 
 const EditInputWrapper = styled.div.attrs({ className: "edit-input-wrapper" })`
@@ -38,15 +39,13 @@ const EditInputErrorText = styled.p.attrs({ className: "input-error-text" })`
 class EditTextInput extends Component {
   constructor(props) {
     super(props);
+    if (this.props.name.toLowerCase().includes("flight")) console.log("TAK");
     this.state = {
-      inputContent: this.props.name.toLowerCase().includes(
-        "birthday" ||
-          this.camelize(this.props.name)
-            .toLowerCase()
-            .includes("flight")
-      )
-        ? this.trimDate(this.props.value)
-        : this.props.value
+      inputContent:
+        this.props.name.toLowerCase().includes("birthday") ||
+        this.props.name.toLowerCase().includes("flightdate")
+          ? this.trimDate(this.props.value)
+          : this.props.value
     };
   }
 
@@ -85,6 +84,22 @@ class EditTextInput extends Component {
             onChange={this.onCheckboxChange}
             name={name}
           />
+        ) : name.toLowerCase().includes("carrier") &&
+          !this.props.pageTitle.toLowerCase().includes("carrier") ? (
+          <SelectBox
+            selectItems={this.props.carriersData}
+            onChange={this.onInputChange}
+            name={name}
+            value={this.state.inputContent}
+          />
+        ) : name.toLowerCase().includes("plane") &&
+          !this.props.pageTitle.toLowerCase().includes("plane") ? (
+          <SelectBox
+            selectItems={this.props.planesData}
+            onChange={this.onInputChange}
+            name={name}
+            value={this.state.inputContent}
+          />
         ) : (
           <EditTextInputWrapper
             value={this.state.inputContent}
@@ -106,7 +121,10 @@ EditTextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isError: PropTypes.bool,
-  errorText: PropTypes.string
+  errorText: PropTypes.string,
+  pageTitle: PropTypes.string,
+  planesData: PropTypes.array,
+  carriersData: PropTypes.array
 };
 
 export default EditTextInput;

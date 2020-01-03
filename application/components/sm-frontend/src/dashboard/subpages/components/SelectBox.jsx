@@ -19,7 +19,11 @@ class SelectBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.selectItems ? this.props.selectItems[0] : ""
+      value: this.props.value
+        ? this.props.value
+        : this.props.selectItems
+        ? this.props.selectItems[0]
+        : ""
     };
   }
 
@@ -56,7 +60,8 @@ class SelectBox extends Component {
 SelectBox.propTypes = {
   selectItems: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string
 };
 
 export default SelectBox;

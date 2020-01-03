@@ -13,6 +13,7 @@ public class FlightResponse {
     public FlightResponse(Flight flight) {
         this.parameterWithTypeList = new ArrayList<>();
 
+        parameterWithTypeList.add(new ParameterWithType(flight.getId(), "id"));
         parameterWithTypeList.add(new ParameterWithType(flight.getDestinationPlace(), "destinationPlace"));
         parameterWithTypeList.add(new ParameterWithType(flight.getStartPlace(), "startPlace"));
         parameterWithTypeList.add(new ParameterWithType(flight.getFlightDate(), "flightDate"));

@@ -247,6 +247,9 @@ class EditPage extends Component {
                 value={item.value}
                 name={item.fieldName}
                 onChange={event => this.onChange(event, item)}
+                planesData={this.props.planesData}
+                carriersData={this.props.carriersData}
+                pageTitle={this.props.pageTitle}
               />
             </ParameterRow>
           ) : null
@@ -262,6 +265,7 @@ class EditPage extends Component {
           icon="far fa-times-circle"
           onClick={this.props.handleCancel}
         />
+        {JSON.stringify(this.state)}
       </EditPageWithLoading>
     );
   }
@@ -276,7 +280,9 @@ EditPage.propTypes = {
   isEditing: PropTypes.bool.isRequired,
   objectParameters: PropTypes.array.isRequired,
   pageTitle: PropTypes.string.isRequired,
-  pageIcon: PropTypes.string.isRequired
+  pageIcon: PropTypes.string.isRequired,
+  planesData: PropTypes.array,
+  carriersData: PropTypes.array
 };
 
 export default EditPage;
