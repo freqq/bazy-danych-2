@@ -1,6 +1,5 @@
 package com.freq.airline.controller;
 
-import com.freq.airline.model.Client;
 import com.freq.airline.payload.*;
 import com.freq.airline.service.ClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class ClientsController {
     private ClientsService clientsService;
 
     @Autowired
-    public ClientsController(ClientsService clientsService){
+    public ClientsController(ClientsService clientsService) {
         this.clientsService = clientsService;
     }
 
@@ -27,25 +26,25 @@ public class ClientsController {
     }
 
     @GetMapping("/{id}")
-    public ClientResponse getClient(@PathVariable("id") Long clientId){
+    public ClientResponse getClient(@PathVariable("id") Long clientId) {
         return clientsService.getClientById(clientId);
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<?> editClient(@PathVariable("id") Long clientId,
-                                        @Valid @RequestBody ClientEditRequest clientEditRequest){
+            @Valid @RequestBody ClientEditRequest clientEditRequest) {
         return clientsService.editClient(clientId, clientEditRequest);
     }
 
     @PostMapping("/remove/{id}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> removeClient(@PathVariable("id") Long clientId){
+    public ResponseEntity<?> removeClient(@PathVariable("id") Long clientId) {
         return clientsService.removeClient(clientId);
     }
 
     @PostMapping("/")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> addClient(@Valid @RequestBody ClientRequest clientRequest){
+    public ResponseEntity<?> addClient(@Valid @RequestBody ClientRequest clientRequest) {
         return clientsService.addClient(clientRequest);
     }
 }

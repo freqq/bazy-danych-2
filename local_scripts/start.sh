@@ -5,15 +5,17 @@ set -e
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function airport_start() (
-    echo "Starting AirportApp."
+    echo "Starting Airline Application."
 
     cd ${SOURCE_DIR}/../application
 
-    #./gradlew docker:sm-backend:appInstall
-    ./gradlew docker:sm-frontend:appInstall
-
+    docker-compose rm &&
+    docker-compose pull &&
+    docker-compose build --no-cache &&
+    docker-compose up -d --force-recreate 
+    
     cd -
-    echo "AirportApp started."
+    echo "Airline Application started."
 )
 
 airport_start

@@ -21,18 +21,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
-)
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint unauthorizedHandler;
     private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     public SecurityConfig(CustomUserDetailsService customUserDetailsService,
-                          JwtAuthenticationEntryPoint unauthorizedHandler){
+            JwtAuthenticationEntryPoint unauthorizedHandler) {
         this.customUserDetailsService = customUserDetailsService;
         this.unauthorizedHandler = unauthorizedHandler;
     }
@@ -60,15 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers("/",
-                "/favicon.ico",
-                "/**/*.png",
-                "/**/*.gif",
-                "/**/*.svg",
-                "/**/*.jpg",
-                "/**/*.html",
-                "/**/*.css",
-                "/**/*.js").permitAll().antMatchers("/api/v1/auth/**").permitAll().antMatchers("/api/v1/user/**").permitAll().antMatchers(HttpMethod.GET, "/api/v1/posts/**", "/api/v1/users/**").permitAll().anyRequest().authenticated();
+        httpSecurity.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
+                        "/**/*.css", "/**/*.js")
+                .permitAll().antMatchers("/api/v1/auth/**").permitAll().antMatchers("/api/v1/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll().anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

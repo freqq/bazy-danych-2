@@ -8,13 +8,8 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "clients", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "pesel",
-                "IDNumber"
-        })
-})
-public class Client  {
+@Table(name = "clients", uniqueConstraints = { @UniqueConstraint(columnNames = { "pesel", "IDNumber" }) })
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -38,9 +33,11 @@ public class Client  {
 
     public String IDNumber;
 
-    public Client() {}
+    public Client() {
+    }
 
-    public Client(Long id, String firstName, String lastName, String pesel, Date birthday, boolean isDiscount, String email, String IDNumber) {
+    public Client(Long id, String firstName, String lastName, String pesel, Date birthday, boolean isDiscount,
+            String email, String IDNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
