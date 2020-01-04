@@ -5,9 +5,6 @@ export const LOGIN_FETCHING = "LOGIN_FETCHING";
 export const LOGIN_OK = "LOGIN_OK";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 
-export const LOGIN_FAIL_TEXT =
-  "There was an error while logging to application.";
-
 export const makeLoginFetching = () => ({
   type: LOGIN_FETCHING
 });
@@ -32,9 +29,7 @@ const loginFunction = (loginRequestData, dispatch) => {
       }, 2000);
     })
     .catch(() => {
-      setTimeout(() => {
-        dispatch(makeLoginFail());
-      }, 2000);
+      dispatch(makeLoginFail());
     });
 };
 

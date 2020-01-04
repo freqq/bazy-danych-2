@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AppToolbar from "dashboard/components/AppToolbar";
 import PropTypes from "prop-types";
 import DashboardRouter from "dashboard/routers/DashboardRouter";
+import { Link } from "react-router-dom";
 
 const MainAreaWrapper = styled.div.attrs({ className: "main-area-wrapper" })`
   grid-area: main-area-wrapper;
@@ -23,14 +24,6 @@ const NavbarRightMenu = styled.ul.attrs({ className: "navbar-right-menu" })`
   padding: 0;
 `;
 
-const NavbarLeftMenu = styled.ul.attrs({ className: "navbar-left-menu" })`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  height: 50px;
-  display: inline-block;
-`;
-
 const NavbarRightMenuItem = styled.li.attrs({
   className: "navbar-right-menu-item"
 })`
@@ -39,22 +32,6 @@ const NavbarRightMenuItem = styled.li.attrs({
   border-left: 2px solid #efeeee;
   height: 50px;
   display: inline-table;
-  font-size: 13px;
-
-  &:hover {
-    background: #efeeee;
-    cursor: pointer;
-  }
-`;
-
-const NavbarLeftMenuItem = styled.li.attrs({
-  className: "navbar-left-menu-item"
-})`
-  margin: 0;
-  padding: 10px 20px;
-  display: inline-block;
-  border-right: 2px solid #efeeee;
-  height: 100%;
   font-size: 13px;
 
   &:hover {
@@ -72,6 +49,19 @@ const UserCircle = styled.p.attrs({ className: "user-circle" })`
   color: #ffffff;
 `;
 
+const NavbarLink = styled(Link).attrs({ className: "navbar-link" })`
+  text-decoration: none;
+  color: #000000;
+
+  &:visited: {
+    color: #000000;
+  }
+
+  &:acitive: {
+    color: #000000;
+  }
+`;
+
 class MainArea extends Component {
   render() {
     const { userName } = this.props;
@@ -81,8 +71,10 @@ class MainArea extends Component {
         <MainAreaNavBar>
           <NavbarRightMenu>
             <NavbarRightMenuItem>
-              <UserCircle>{userName.charAt(0).toUpperCase()}</UserCircle>
-              {userName}
+              <NavbarLink to="/admin/profile">
+                <UserCircle>{userName.charAt(0).toUpperCase()}</UserCircle>
+                {userName}
+              </NavbarLink>
             </NavbarRightMenuItem>
             <NavbarRightMenuItem onClick={this.props.logoutCurrentUser}>
               <UserCircle style={{ padding: "5px 7px" }}>

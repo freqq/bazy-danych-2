@@ -274,7 +274,6 @@ class EditPage extends Component {
           icon="far fa-times-circle"
           onClick={this.props.handleCancel}
         />
-        {JSON.stringify(this.state)}
       </EditPageWithLoading>
     );
   }

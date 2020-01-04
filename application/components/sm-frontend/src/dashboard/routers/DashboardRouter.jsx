@@ -17,6 +17,7 @@ export const FLIGHTS_PATH = getPath("/admin/flights");
 export const FLIGHTS_EDIT_PATH = getPath("/admin/flights/:id");
 export const ORDERS_PATH = getPath("/admin/orders");
 export const ORDERS_EDIT_PATH = getPath("/admin/orders/:id");
+export const USER_PROFILE_PATH = getPath("/admin/profile");
 
 export const LoadableDashbaord = makeLoadable(() =>
   import("dashboard/subpages/Dashboard")
@@ -70,6 +71,10 @@ export const LoadableOrdersEdit = makeLoadable(() =>
   import("dashboard/subpages/OrdersEdit")
 );
 
+export const LoadableProfile = makeLoadable(() =>
+  import("dashboard/subpages/UserProfile")
+);
+
 const DashboardRouter = () => (
   <Switch>
     <Route exact path={DASHBOARD_PATH} component={LoadableDashbaord} />
@@ -86,6 +91,7 @@ const DashboardRouter = () => (
     <Route exact path={FLIGHTS_EDIT_PATH} component={LoadableFlightsEdit} />
     <Route exact path={ORDERS_PATH} component={LoadableOrders} />
     <Route exact path={ORDERS_EDIT_PATH} component={LoadableOrdersEdit} />
+    <Route exact path={USER_PROFILE_PATH} component={LoadableProfile} />
     <Route component={NotFoundPage} />
   </Switch>
 );

@@ -5,6 +5,7 @@ import ticketsReducer from "dashboard/subpages/reducers/ticketsReducer";
 import carriersReducer from "dashboard/subpages/reducers/carriersReducer";
 import flightsReducer from "dashboard/subpages/reducers/flightsReducer";
 import ordersReducer from "dashboard/subpages/reducers/ordersReducer";
+import userReducer from "dashboard/subpages/reducers/userReducer";
 
 export default combineReducers({
   planes: planesReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   tickets: ticketsReducer,
   carriers: carriersReducer,
   flights: flightsReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  user: userReducer
 });

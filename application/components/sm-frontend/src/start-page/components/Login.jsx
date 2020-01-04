@@ -97,7 +97,9 @@ class Login extends Component {
     <ErrorComponent>Given login or password is incorrect!</ErrorComponent>
   );
 
-  handleLogin = () => {
+  handleLogin = event => {
+    event.preventDefault();
+
     var loginRequest = {
       username: this.state.loginValue,
       password: this.state.passwordValue
@@ -123,7 +125,7 @@ class Login extends Component {
       this.state.passwordValue.length > 0 &&
       this.state.loginValue.length > 0
     )
-      this.handleLogin();
+      this.handleLogin(event);
   };
 
   render() {
