@@ -76,6 +76,9 @@ class EditPage extends Component {
       return;
     });
 
+    console.log(this.state.editedParameters)
+    console.log(idObj);
+
     this.props.editObject(idObj, this.state.editedParameters);
   };
 
@@ -225,7 +228,10 @@ class EditPage extends Component {
       isEditing,
       objectParameters,
       pageTitle,
-      pageIcon
+      pageIcon,
+      ticketsData,
+      flightsData,
+      clientsData
     } = this.props;
     const { canSendForm } = this.state;
 
@@ -249,6 +255,9 @@ class EditPage extends Component {
                 onChange={event => this.onChange(event, item)}
                 planesData={this.props.planesData}
                 carriersData={this.props.carriersData}
+                ticketsData={ticketsData}
+                flightsData={flightsData}
+                clientsData={clientsData}
                 pageTitle={this.props.pageTitle}
               />
             </ParameterRow>
@@ -282,7 +291,10 @@ EditPage.propTypes = {
   pageTitle: PropTypes.string.isRequired,
   pageIcon: PropTypes.string.isRequired,
   planesData: PropTypes.array,
-  carriersData: PropTypes.array
+  carriersData: PropTypes.array,
+  clientsData: PropTypes.array,
+  flightsData: PropTypes.array,
+  ticketsData: PropTypes.array
 };
 
 export default EditPage;

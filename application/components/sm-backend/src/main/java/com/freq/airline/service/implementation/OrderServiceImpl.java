@@ -88,13 +88,16 @@ public class OrderServiceImpl implements OrdersService {
 
     public ResponseEntity<?> editOrder(Long orderId, OrderEditRequest orderEditRequest) {
         Optional<Order> order = ordersRepository.findById(orderId);
+        Optional<Client> client = null;
+        Optional<Flight> flight = null;
+        Optional<Ticket> ticket = null;
 
-        Optional<Client> client = clientsRepository.findClientByFirstName(orderEditRequest.getClient());
-        Optional<Flight> flight = flightsRepository.findByPlanePlaneModel(orderEditRequest.getFlight());
-        Optional<Ticket> ticket = ticketsRepository.findBySeatNumber(orderEditRequest.getTicket());
-
-        if(!client.isPresent() || !flight.isPresent() || !ticket.isPresent())
-            return new ResponseEntity<>("Given order data is wrong!", HttpStatus.BAD_REQUEST);
+        if(orderEditRequest.getClient() != null)
+            client = clientsRepository.findById(orderEditRequest.getClient());
+        if(orderEditRequest.getFlight() != null)
+            flight = flightsRepository.findById(orderEditRequest.getFlight());
+        if(orderEditRequest.getTicket() != null)
+            ticket = ticketsRepository.findById(orderEditRequest.getTicket());
 
         if (order.isPresent()) {
             if (orderEditRequest.getBaggageWeight() != 0)

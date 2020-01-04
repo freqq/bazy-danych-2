@@ -39,7 +39,6 @@ const EditInputErrorText = styled.p.attrs({ className: "input-error-text" })`
 class EditTextInput extends Component {
   constructor(props) {
     super(props);
-    if (this.props.name.toLowerCase().includes("flight")) console.log("TAK");
     this.state = {
       inputContent:
         this.props.name.toLowerCase().includes("birthday") ||
@@ -100,6 +99,28 @@ class EditTextInput extends Component {
             name={name}
             value={this.state.inputContent}
           />
+        ) : name.toLowerCase().includes("client") ? (
+          <SelectBox
+            selectItems={this.props.clientsData}
+            onChange={this.onInputChange}
+            name={name}
+            value={this.state.inputContent}
+          />
+        ) : name.toLowerCase().includes("flight") &&
+          !name.toLowerCase().includes("class") ? (
+          <SelectBox
+            selectItems={this.props.flightsData}
+            onChange={this.onInputChange}
+            name={name}
+            value={this.state.inputContent}
+          />
+        ) : name.toLowerCase().includes("ticket") ? (
+          <SelectBox
+            selectItems={this.props.ticketsData}
+            onChange={this.onInputChange}
+            name={name}
+            value={this.state.inputContent}
+          />
         ) : (
           <EditTextInputWrapper
             value={this.state.inputContent}
@@ -124,7 +145,10 @@ EditTextInput.propTypes = {
   errorText: PropTypes.string,
   pageTitle: PropTypes.string,
   planesData: PropTypes.array,
-  carriersData: PropTypes.array
+  carriersData: PropTypes.array,
+  clientsData: PropTypes.array,
+  flightsData: PropTypes.array,
+  ticketsData: PropTypes.array
 };
 
 export default EditTextInput;

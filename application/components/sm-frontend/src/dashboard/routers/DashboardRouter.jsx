@@ -66,6 +66,10 @@ export const LoadableFlightsEdit = makeLoadable(() =>
   import("dashboard/subpages/FlightsEdit")
 );
 
+export const LoadableOrdersEdit = makeLoadable(() =>
+  import("dashboard/subpages/OrdersEdit")
+);
+
 const DashboardRouter = () => (
   <Switch>
     <Route exact path={DASHBOARD_PATH} component={LoadableDashbaord} />
@@ -81,6 +85,7 @@ const DashboardRouter = () => (
     <Route exact path={FLIGHTS_PATH} component={LoadableFlights} />
     <Route exact path={FLIGHTS_EDIT_PATH} component={LoadableFlightsEdit} />
     <Route exact path={ORDERS_PATH} component={LoadableOrders} />
+    <Route exact path={ORDERS_EDIT_PATH} component={LoadableOrdersEdit} />
     <Route component={NotFoundPage} />
   </Switch>
 );

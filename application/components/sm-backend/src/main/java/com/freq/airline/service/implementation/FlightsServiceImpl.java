@@ -94,6 +94,7 @@ public class FlightsServiceImpl implements FlightsService {
         Optional<Flight> flight = flightsRepository.findById(flightId);
         Optional<Plane> plane = null;
         Optional<Carrier> carrier = null;
+
         if(flightEditRequest.getPlaneName() != null){
             plane = planesRepository.findById(flightEditRequest.getPlaneName());
             if(!plane.isPresent())

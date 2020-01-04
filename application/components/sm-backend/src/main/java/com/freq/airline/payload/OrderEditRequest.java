@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class OrderEditRequest {
     private Long id;
-    private String client;
-    private String flight;
-    private String ticket;
+    private Long client;
+    private Long flight;
+    private Long ticket;
     private int baggageWeight;
     private String flightClass;
 }
