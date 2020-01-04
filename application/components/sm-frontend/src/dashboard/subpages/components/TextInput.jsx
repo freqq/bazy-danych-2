@@ -18,13 +18,14 @@ const TextInputWrapper = styled.input.attrs({ className: "input-wrapper" })`
 
 class TextInput extends Component {
   render() {
-    const { value, onChange, placeholder, name } = this.props;
+    const { value, onChange, placeholder, name, id } = this.props;
     return (
       <TextInputWrapper
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         name={name}
+        id={id}
       />
     );
   }
@@ -34,7 +35,8 @@ TextInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default TextInput;

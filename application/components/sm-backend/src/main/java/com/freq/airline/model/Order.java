@@ -11,22 +11,22 @@ import javax.validation.constraints.NotNull;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    public Client client;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "flight_id", nullable = false)
-    private Flight flight;
+    public Flight flight;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ticket_id", nullable = false)
-    private Ticket ticket;
+    public Ticket ticket;
 
-    private int baggageWeight;
+    public int baggageWeight;
 
     @NotNull
-    private String flightClass;
+    public String flightClass;
 }

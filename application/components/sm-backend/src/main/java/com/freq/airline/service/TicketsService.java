@@ -15,4 +15,5 @@ public interface TicketsService {
     ResponseEntity<?> editTicket(Long ticketId, TicketEditRequest ticketEditRequest);
     ResponseEntity<?> removeTicket(Long ticketId);
     ResponseEntity<?> addTicket(TicketRequest ticketRequest);
+    List<SelectResponse> getTicketsNames();
 }

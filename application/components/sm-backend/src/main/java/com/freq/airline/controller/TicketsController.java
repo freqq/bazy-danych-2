@@ -47,4 +47,9 @@ public class TicketsController {
     public ResponseEntity<?> addTicket(@Valid @RequestBody TicketRequest ticketRequest){
         return ticketsService.addTicket(ticketRequest);
     }
+
+    @GetMapping("/names")
+    public List<SelectResponse> getTicketsNames(){
+        return ticketsService.getTicketsNames();
+    }
 }

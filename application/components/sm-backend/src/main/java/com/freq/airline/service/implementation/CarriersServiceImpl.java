@@ -4,6 +4,7 @@ import com.freq.airline.model.Carrier;
 import com.freq.airline.payload.*;
 import com.freq.airline.repository.CarriersRepository;
 import com.freq.airline.service.CarriersService;
+import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,12 +80,12 @@ public class CarriersServiceImpl implements CarriersService {
         return new ResponseEntity<>("Carrier with given id doesnt exists.", HttpStatus.NOT_FOUND);
     }
 
-    public List<String> getCarrierNames(){
+    public List<SelectResponse> getCarrierNames(){
         List<Carrier> carriers = carriersRepository.findAll();
-        List<String> carrierNames = new ArrayList<>();
+        List<SelectResponse> carrierNames = new ArrayList<>();
 
         for(Carrier carrier : carriers)
-            carrierNames.add(carrier.getCarrierName());
+            carrierNames.add(new SelectResponse(carrier.getId(), carrier.getCarrierName()));
 
         return carrierNames;
     }

@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface FlightsRepository extends JpaRepository<Flight, Long> {
     List<Flight> findAll();
     Optional<Flight> findById(Long flightId);
+    Optional<Flight> findByPlanePlaneModel(String planeModel);
     void removeById(Long flightId);
 }

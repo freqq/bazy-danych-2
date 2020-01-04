@@ -5,4 +5,7 @@ set -e
 echo "Running tests."
 
 cd ../tests
-for f in *.py; do python "$f"; done
+for f in *.py; do 
+    echo "Running $f test suite..."
+    python "$f"; 
+done

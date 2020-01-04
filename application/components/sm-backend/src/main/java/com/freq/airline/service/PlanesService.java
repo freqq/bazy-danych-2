@@ -4,6 +4,7 @@ import com.freq.airline.model.Plane;
 import com.freq.airline.payload.PlaneEditRequest;
 import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.payload.PlaneResponse;
+import com.freq.airline.payload.SelectResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,5 +19,5 @@ public interface PlanesService {
     ResponseEntity<?> editPlane(Long planeId, PlaneEditRequest planeEditRequest);
     ResponseEntity<?> removePlane(Long planeId);
     ResponseEntity<?> addPlane(PlaneRequest planeRequest);
-    List<String> getPlanesNames();
+    List<SelectResponse> getPlanesNames();
 }

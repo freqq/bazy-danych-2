@@ -2,6 +2,7 @@ package com.freq.airline.controller;
 
 import com.freq.airline.payload.*;
 import com.freq.airline.service.FlightsService;
+import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,5 +47,10 @@ public class FlightsController {
     public ResponseEntity<?> editFlight(@PathVariable("id") Long flightId,
                                         @Valid @RequestBody FlightEditRequest flightEditRequest){
         return flightsService.editFlight(flightId, flightEditRequest);
+    }
+
+    @GetMapping("/names")
+    public List<SelectResponse> getFlightsNames(){
+        return flightsService.getFlightsNames();
     }
 }

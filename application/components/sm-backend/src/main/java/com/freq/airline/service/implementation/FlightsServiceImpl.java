@@ -66,11 +66,11 @@ public class FlightsServiceImpl implements FlightsService {
     public ResponseEntity<?> addFlight(FlightRequest flightRequest) {
         Flight flight = new Flight();
 
-        Optional<Plane> plane = planesRepository.findByPlaneModel(flightRequest.getPlaneName());
+        Optional<Plane> plane = planesRepository.findById(flightRequest.getPlaneName());
         if(!plane.isPresent())
             return new ResponseEntity<>("Given plane doesnt exist", HttpStatus.BAD_REQUEST);
 
-        Optional<Carrier> carrier = carriersRepository.findByCarrierName(flightRequest.getCarrierName());
+        Optional<Carrier> carrier = carriersRepository.findById(flightRequest.getCarrierName());
         if(!carrier.isPresent())
             return new ResponseEntity<>("Given carrier doesnt exist", HttpStatus.BAD_REQUEST);
 
@@ -95,13 +95,13 @@ public class FlightsServiceImpl implements FlightsService {
         Optional<Plane> plane = null;
         Optional<Carrier> carrier = null;
         if(flightEditRequest.getPlaneName() != null){
-            plane = planesRepository.findByPlaneModel(flightEditRequest.getPlaneName());
+            plane = planesRepository.findById(flightEditRequest.getPlaneName());
             if(!plane.isPresent())
                 return new ResponseEntity<>("Given plane doesnt exist", HttpStatus.BAD_REQUEST);
         }
 
         if(flightEditRequest.getCarrierName() != null){
-            carrier = carriersRepository.findByCarrierName(flightEditRequest.getCarrierName());
+            carrier = carriersRepository.findById(flightEditRequest.getCarrierName());
             if(!carrier.isPresent())
                 return new ResponseEntity<>("Given carrier doesnt exist", HttpStatus.BAD_REQUEST);
         }
@@ -124,5 +124,17 @@ public class FlightsServiceImpl implements FlightsService {
         }
 
         return new ResponseEntity<>("Flight with given id doesnt exists.", HttpStatus.NOT_FOUND);
+    }
+
+    public List<SelectResponse> getFlightsNames() {
+        List<Flight> flights = flightsRepository.findAll();
+        List<SelectResponse> flightsNames = new ArrayList<>();
+
+        for(Flight flight : flights)
+            flightsNames.add(new SelectResponse(flight.getId(),
+                    flight.getStartPlace() + " -> " + flight.getDestinationPlace()
+                            + " (" + flight.getFlightDate().toString().split(" ")[0] + ")"));
+
+        return flightsNames;
     }
 }

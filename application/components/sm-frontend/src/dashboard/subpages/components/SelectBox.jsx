@@ -46,8 +46,8 @@ class SelectBox extends Component {
       >
         {selectItems
           ? selectItems.map(item => (
-              <OptionValue value={item} key={item}>
-                {item}
+              <OptionValue value={item.id} key={item.value}>
+                {item.value}
               </OptionValue>
             ))
           : null}

@@ -1,10 +1,8 @@
 package com.freq.airline.service.implementation;
 
 import com.freq.airline.model.Client;
-import com.freq.airline.payload.ClientEditRequest;
-import com.freq.airline.payload.ClientListResponse;
-import com.freq.airline.payload.ClientRequest;
-import com.freq.airline.payload.ClientResponse;
+import com.freq.airline.model.Flight;
+import com.freq.airline.payload.*;
 import com.freq.airline.repository.ClientsRepository;
 import com.freq.airline.service.ClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +103,16 @@ public class ClientsServiceImpl implements ClientsService {
         }
 
         return new ResponseEntity<>("Client with given id doesnt exists.", HttpStatus.NOT_FOUND);
+    }
+
+    public List<SelectResponse> getClientsNames() {
+        List<Client> clients = clientsRepository.findAll();
+        List<SelectResponse> clientsNames = new ArrayList<>();
+
+        for(Client client : clients)
+            clientsNames.add(new SelectResponse(client.getId(),
+                    client.getFirstName() + " " + client.getLastName() + " (" + client.getPesel() + ")"));
+
+        return clientsNames;
     }
 }

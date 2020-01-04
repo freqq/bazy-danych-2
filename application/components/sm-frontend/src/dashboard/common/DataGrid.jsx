@@ -139,10 +139,14 @@ class DataGrid extends Component {
           ))
         )}
         <AddNew
+          pageTitle={this.props.pageTitle}
           columnHeaders={this.props.columnHeaders}
           onClick={this.props.onAdd}
           carriersData={this.props.carriersData}
           planesData={this.props.planesData}
+          ticketsData={this.props.ticketsData}
+          flightsData={this.props.flightsData}
+          clientsData={this.props.clientsData}
         />
       </DataGridWrapper>
     );
@@ -157,7 +161,11 @@ DataGrid.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onSort: PropTypes.func.isRequired,
   carriersData: PropTypes.array,
-  planesData: PropTypes.array
+  planesData: PropTypes.array,
+  clientsData: PropTypes.array,
+  flightsData: PropTypes.array,
+  ticketsData: PropTypes.array,
+  pageTitle: PropTypes.string
 };
 
 export default DataGrid;

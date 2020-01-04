@@ -10,6 +10,6 @@ public class FlightEditRequest {
     private String destinationPlace;
     private String startPlace;
     private Date flightDate;
-    private String carrierName;
-    private String planeName;
+    private Long carrierName;
+    private Long planeName;
 }

@@ -4,6 +4,7 @@ import com.freq.airline.model.Plane;
 import com.freq.airline.payload.PlaneEditRequest;
 import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.payload.PlaneResponse;
+import com.freq.airline.payload.SelectResponse;
 import com.freq.airline.repository.PlanesRepository;
 import com.freq.airline.service.PlanesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class PlanesServiceImpl implements PlanesService {
 
     public ResponseEntity<?> addPlane(PlaneRequest planeRequest){
         Plane plane = new Plane();
+
         plane.setPlaneModel(planeRequest.getPlaneModel());
         plane.setSeatsCount(Integer.parseInt(planeRequest.getSeatsCount()));
 
@@ -70,14 +72,13 @@ public class PlanesServiceImpl implements PlanesService {
         return new ResponseEntity<>("Plane with given id doesnt exists.", HttpStatus.NOT_FOUND);
     }
 
-    public List<String> getPlanesNames() {
+    public List<SelectResponse> getPlanesNames() {
         List<Plane> planes = planesRepository.findAll();
-        List<String> planesNames = new ArrayList<>();
+        List<SelectResponse> planesNames = new ArrayList<>();
 
-        for(Plane plane : planes)
-            planesNames.add(plane.getPlaneModel());
+        for (Plane plane : planes)
+            planesNames.add(new SelectResponse(plane.getId(), plane.getPlaneModel()));
 
         return planesNames;
     }
-
 }

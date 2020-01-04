@@ -4,6 +4,7 @@ import com.freq.airline.model.Plane;
 import com.freq.airline.payload.PlaneEditRequest;
 import com.freq.airline.payload.PlaneRequest;
 import com.freq.airline.payload.PlaneResponse;
+import com.freq.airline.payload.SelectResponse;
 import com.freq.airline.service.PlanesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class PlanesController {
     }
 
     @GetMapping("/names")
-    public List<String> getPlanesNames(){
+    public List<SelectResponse> getPlanesNames(){
         return planesService.getPlanesNames();
     }
 

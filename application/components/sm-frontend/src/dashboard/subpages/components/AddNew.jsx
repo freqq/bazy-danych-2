@@ -80,8 +80,6 @@ class AddNew extends Component {
       Object.assign(addRequest, { [field]: this.state[field] });
     });
 
-    console.log(addRequest);
-
     this.props.onClick(addRequest);
   };
 
@@ -94,7 +92,10 @@ class AddNew extends Component {
           name={item}
         />
       );
-    else if (this.camelize(item).toLowerCase() === "carriername") {
+    else if (
+      this.camelize(item).toLowerCase() === "carriername" &&
+      this.props.pageTitle.toLowerCase() !== "carriers"
+    ) {
       return (
         <SelectBox
           selectItems={this.props.carriersData}
@@ -110,9 +111,38 @@ class AddNew extends Component {
           name={item}
         />
       );
+    } else if (this.camelize(item).toLowerCase() === "client") {
+      return (
+        <SelectBox
+          selectItems={this.props.clientsData}
+          onChange={this.onChange}
+          name={item}
+        />
+      );
+    } else if (this.camelize(item).toLowerCase() === "flight") {
+      return (
+        <SelectBox
+          selectItems={this.props.flightsData}
+          onChange={this.onChange}
+          name={item}
+        />
+      );
+    } else if (this.camelize(item).toLowerCase() === "ticket") {
+      return (
+        <SelectBox
+          selectItems={this.props.ticketsData}
+          onChange={this.onChange}
+          name={item}
+        />
+      );
     } else
       return (
-        <TextInput name={item} placeholder={item} onChange={this.onChange} />
+        <TextInput
+          name={item}
+          placeholder={item}
+          onChange={this.onChange}
+          id={this.camelize(item)}
+        />
       );
   };
 
@@ -130,6 +160,7 @@ class AddNew extends Component {
             className="fas fa-plus"
             disabled={!canSendForm}
             onClick={this.addData}
+            id="add-new-button"
           />
         </DataGridCell>
       </DataGridRow>
@@ -141,7 +172,10 @@ AddNew.propTypes = {
   columnHeaders: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired,
   carriersData: PropTypes.array,
-  planesData: PropTypes.array
+  planesData: PropTypes.array,
+  clientsData: PropTypes.array,
+  flightsData: PropTypes.array,
+  ticketsData: PropTypes.array
 };
 
 export default AddNew;

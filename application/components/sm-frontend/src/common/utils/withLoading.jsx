@@ -26,7 +26,11 @@ const withLoading = (Component, size = ProgIndSize.SMALL) => {
     }
     return (
       <CenteringWrapper>
-        <img src={ProgressIndicatorCircular} alt="ProgressIndicatorCircular" />
+        <img
+          src={ProgressIndicatorCircular}
+          alt="ProgressIndicatorCircular"
+          id="progress-indicator"
+        />
       </CenteringWrapper>
     );
   };

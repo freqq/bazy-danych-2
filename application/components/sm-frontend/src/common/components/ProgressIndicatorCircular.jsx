@@ -14,6 +14,7 @@ const ProgressIndicatorCircular = () => {
       <img
         src={ProgressIndicatorCircularImage}
         alt="ProgressIndicatorCircularImage"
+        id="progress-indicator"
       />
     </CenteringWrapper>
   );

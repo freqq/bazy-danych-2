@@ -37,7 +37,7 @@ public class CarriersController {
     }
 
     @GetMapping("/names")
-    public List<String> getCarrierNames(){
+    public List<SelectResponse> getCarrierNames(){
         return carriersService.getCarrierNames();
     }
 

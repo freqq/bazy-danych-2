@@ -47,4 +47,9 @@ public class ClientsController {
     public ResponseEntity<?> addClient(@Valid @RequestBody ClientRequest clientRequest) {
         return clientsService.addClient(clientRequest);
     }
+
+    @GetMapping("/names")
+    public List<SelectResponse> getClientsNames(){
+        return clientsService.getClientsNames();
+    }
 }

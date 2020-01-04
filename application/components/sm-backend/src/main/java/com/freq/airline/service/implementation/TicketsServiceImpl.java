@@ -1,5 +1,6 @@
 package com.freq.airline.service.implementation;
 
+import com.freq.airline.model.Plane;
 import com.freq.airline.model.Ticket;
 import com.freq.airline.payload.*;
 import com.freq.airline.repository.TicketsRepository;
@@ -81,5 +82,16 @@ public class TicketsServiceImpl implements TicketsService {
         }
 
         return new ResponseEntity<>("Ticket with given id doesnt exists.", HttpStatus.NOT_FOUND);
+    }
+
+    public List<SelectResponse> getTicketsNames() {
+        List<Ticket> tickets = ticketsRepository.findAll();
+        List<SelectResponse> ticketsNames = new ArrayList<>();
+
+        for(Ticket ticket : tickets)
+            ticketsNames.add(new SelectResponse(ticket.getId(),
+                    ticket.getSeatNumber() + " (" + ticket.getPrice() + " $)"));
+
+        return ticketsNames;
     }
 }

@@ -123,7 +123,7 @@ class SideBar extends Component {
   renderNavigation = () => (
     <SideNavigation>
       {NAVIGATION_ITEMS.map(item => (
-        <SideNavigationLink to={item.to}>
+        <SideNavigationLink to={item.to} id={item.name.toLowerCase()}>
           <SideNavigationItem>
             <SideNavigationLeftIcon className={item.icon} />
             {item.name} <SideNavigationGotoIcon />

@@ -46,7 +46,10 @@ class ListPage extends Component {
       pageIcon,
       pageTitle,
       carriersData,
-      planesData
+      planesData,
+      ticketsData,
+      flightsData,
+      clientsData
     } = this.props;
 
     if (isError) return <FetchingErrorPlaceholder />;
@@ -63,8 +66,12 @@ class ListPage extends Component {
         </SubpageTitle>
         <Search rowData={objectsData} searchObjects={searchObjects} />
         <DataGrid
+          pageTitle={pageTitle}
           carriersData={carriersData}
           planesData={planesData}
+          ticketsData={ticketsData}
+          flightsData={flightsData}
+          clientsData={clientsData}
           isLoading={isFetching}
           columnHeaders={this.props.columnHeaders}
           onDelete={this.props.removeObject}
@@ -82,6 +89,7 @@ ListPage.propTypes = {
   objectsData: PropTypes.array.isRequired,
   searchData: PropTypes.array.isRequired,
   getObjects: PropTypes.func.isRequired,
+  pageTitle: PropTypes.string.isRequired,
   removeObject: PropTypes.func.isRequired,
   objectEdit: PropTypes.func.isRequired,
   addObject: PropTypes.func.isRequired,
@@ -95,6 +103,9 @@ ListPage.propTypes = {
   columnHeaders: PropTypes.array.isRequired,
   carriersData: PropTypes.array,
   planesData: PropTypes.array,
+  clientsData: PropTypes.array,
+  flightsData: PropTypes.array,
+  ticketsData: PropTypes.array
 };
 
 export default ListPage;
