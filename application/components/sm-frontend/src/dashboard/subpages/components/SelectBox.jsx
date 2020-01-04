@@ -25,6 +25,8 @@ class SelectBox extends Component {
         ? this.props.selectItems[0]
         : ""
     };
+
+    console.log(this.state.value);
   }
 
   onChange = event => {

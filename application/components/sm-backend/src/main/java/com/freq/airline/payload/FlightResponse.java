@@ -17,7 +17,7 @@ public class FlightResponse {
         parameterWithTypeList.add(new ParameterWithType(flight.getDestinationPlace(), "destinationPlace"));
         parameterWithTypeList.add(new ParameterWithType(flight.getStartPlace(), "startPlace"));
         parameterWithTypeList.add(new ParameterWithType(flight.getFlightDate(), "flightDate"));
-        parameterWithTypeList.add(new ParameterWithType(flight.getCarrier().getCarrierName(), "carrierName"));
-        parameterWithTypeList.add(new ParameterWithType(flight.getPlane().getPlaneModel(), "planeName"));
+        parameterWithTypeList.add(new ParameterWithType(flight.getCarrier().getId(), "carrierName"));
+        parameterWithTypeList.add(new ParameterWithType(flight.getPlane().getId(), "planeName"));
     }
 }
