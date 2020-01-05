@@ -3,6 +3,7 @@ package com.freq.airline.controller;
 import com.freq.airline.payload.*;
 import com.freq.airline.service.OrdersService;
 import com.freq.airline.service.TicketsService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,5 +48,20 @@ public class OrdersController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addOrder(@Valid @RequestBody OrderRequest orderRequest){
         return ordersService.addOrder(orderRequest);
+    }
+
+    @GetMapping("/valuable")
+    public ChartData getValuableFlightsChartData() {
+        return ordersService.getValuableFlightsChartData();
+    }
+
+    @GetMapping("/mostflights")
+    public ChartData getPlanesWithLargerstNumberOfFlights(){
+        return ordersService.getPlanesWithLargerstNumberOfFlights();
+    }
+
+    @GetMapping("/largest")
+    public ChartData getLargestPlanes(){
+        return ordersService.getLargestPlanes();
     }
 }

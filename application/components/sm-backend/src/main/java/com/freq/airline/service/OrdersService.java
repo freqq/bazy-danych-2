@@ -15,4 +15,7 @@ public interface OrdersService {
     ResponseEntity<?> editOrder(Long orderId, OrderEditRequest orderEditRequest);
     ResponseEntity<?> removeOrder(Long orderId);
     ResponseEntity<?> addOrder(OrderRequest orderRequest);
+    ChartData getValuableFlightsChartData();
+    ChartData getPlanesWithLargerstNumberOfFlights();
+    ChartData getLargestPlanes();
 }
