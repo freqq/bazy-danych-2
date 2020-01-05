@@ -177,8 +177,6 @@ class UserProfile extends Component {
 
   handleSubmit = () => {
     this.props.editUser(this.state.editedData);
-
-    console.log(this.state.editedData);
   };
 
   onChange = event => {

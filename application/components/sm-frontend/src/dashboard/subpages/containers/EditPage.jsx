@@ -76,9 +76,6 @@ class EditPage extends Component {
       return;
     });
 
-    console.log(this.state.editedParameters)
-    console.log(idObj);
-
     this.props.editObject(idObj, this.state.editedParameters);
   };
 

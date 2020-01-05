@@ -183,7 +183,6 @@ import {
           searchData: copy.sort((a, b) => {
             var x = a[payload];
             var y = b[payload];
-            console.log(x, y);
             return x < y ? -1 : x > y ? 1 : 0;
           })
         };

@@ -29,7 +29,9 @@ const loginFunction = (loginRequestData, dispatch) => {
       }, 2000);
     })
     .catch(() => {
-      dispatch(makeLoginFail());
+      setTimeout(() => {
+        dispatch(makeLoginFail());
+      }, 2000);
     });
 };
 
