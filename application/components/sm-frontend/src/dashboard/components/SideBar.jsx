@@ -8,6 +8,7 @@ const SideBarWrapper = styled.div.attrs({
 })`
   grid-area: side-bar-wrapper;
   background: #3a537a;
+  position: relative;
 `;
 
 const SideBarHeader = styled.div.attrs({ className: "side-bar-header" })`
@@ -75,6 +76,16 @@ const SideNavigationLink = styled(Link).attrs({
   text-decoration: none;
 `;
 
+const Copyright = styled.div.attrs({ className: "copyright" })`
+  position: absolute;
+  top: 95%;
+  left: 30%;
+  font-size: 12px;
+  color: #f1f1f1;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+`;
+
 const SideNavigationGotoIcon = styled.i.attrs({
   className: "side-navigation-goto-icon fas fa-chevron-right"
 })`
@@ -140,6 +151,7 @@ class SideBar extends Component {
         </SideBarHeader>
         <NavigationHeader>Main Navigation</NavigationHeader>
         {this.renderNavigation()}
+        <Copyright>&copy; 2020 LOT Airlines</Copyright>
       </SideBarWrapper>
     );
   }

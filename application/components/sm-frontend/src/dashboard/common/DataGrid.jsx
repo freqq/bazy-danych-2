@@ -131,6 +131,7 @@ class DataGrid extends Component {
               })}
               <DataGridCell>
                 <ActionButton
+                  id="delete-button"
                   className="far fa-trash-alt"
                   onClick={() => this.props.onDelete(item.id)}
                 />

@@ -63,6 +63,11 @@ const Title = styled.p.attrs({ className: "title" })`
   font-size: 14px;
   text-transformation: uppercase;
   margin-top: 40px;
+  text-align: center;
+`;
+
+const UserBox = styled.div.attrs({ className: "user-info-box" })`
+  margin-left: 10px;
 `;
 
 const InfoList = styled.ul.attrs({ className: "info-list" })`
@@ -231,21 +236,25 @@ class UserProfile extends Component {
         <UserLeftWrapper>
           <UserCircleBig>A</UserCircleBig>
           <Username>{userData.username}</Username>
-          <Title>Contact Information</Title>
-          <InfoList>
-            <InfoListElement>
-              <InfoListElementName>First Name: </InfoListElementName>
-              <InfoListElementValue>{userData.firstName}</InfoListElementValue>
-            </InfoListElement>
-            <InfoListElement>
-              <InfoListElementName>Last Name: </InfoListElementName>
-              <InfoListElementValue>{userData.lastName}</InfoListElementValue>
-            </InfoListElement>
-            <InfoListElement>
-              <InfoListElementName>Email: </InfoListElementName>
-              <InfoListElementValue>{userData.email}</InfoListElementValue>
-            </InfoListElement>
-          </InfoList>
+          <UserBox>
+            <Title>Contact Information</Title>
+            <InfoList>
+              <InfoListElement>
+                <InfoListElementName>First Name: </InfoListElementName>
+                <InfoListElementValue>
+                  {userData.firstName}
+                </InfoListElementValue>
+              </InfoListElement>
+              <InfoListElement>
+                <InfoListElementName>Last Name: </InfoListElementName>
+                <InfoListElementValue>{userData.lastName}</InfoListElementValue>
+              </InfoListElement>
+              <InfoListElement>
+                <InfoListElementName>Email: </InfoListElementName>
+                <InfoListElementValue>{userData.email}</InfoListElementValue>
+              </InfoListElement>
+            </InfoList>
+          </UserBox>
         </UserLeftWrapper>
         <UserRightWrapper>
           <Title>Edit profile information:</Title>

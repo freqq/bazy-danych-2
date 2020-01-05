@@ -20,7 +20,7 @@ class StartPage(unittest.TestCase):
         elem = driver.find_element_by_id("login-input")
         elem.send_keys("admin")
         elem = driver.find_element_by_id("password-input")
-        elem.send_keys("admin")
+        elem.send_keys("admin2")
         elem.send_keys(Keys.RETURN)
         driver.find_element_by_class_name("login-button").click()
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".toolbar-header")))

@@ -139,8 +139,8 @@ public class OrderServiceImpl implements OrdersService {
         for(Order order : limitedOrders) {
             labels.add(order.getClient().getFirstName() + " " + order.getClient().getLastName());
             data.add(order.getTicket().getPrice());
-            backgroundColors.add("rgba("+getRandomValue(0, 255)+","+getRandomValue(0,255)+","
-                    +getRandomValue(0,255)+","+getRandomFloatValue()+")");
+            backgroundColors.add("rgba("+getRandomValue(130, 200)+","+getRandomValue(180,210)+","
+                    +getRandomValue(150,255)+","+getRandomFloatValue()+")");
         }
 
         DataSet dataSet = new DataSet();
@@ -177,8 +177,8 @@ public class OrderServiceImpl implements OrdersService {
         for(PlaneCount planeCount : planeCounts) {
             labels.add(planesRepository.findById(planeCount.getPlaneId()).get().getPlaneModel());
             data.add(planeCount.getPlaneCount());
-            backgroundColors.add("rgba("+getRandomValue(0, 255)+","+getRandomValue(0,255)+","
-                    +getRandomValue(0,255)+","+getRandomFloatValue()+")");
+            backgroundColors.add("rgba("+getRandomValue(130, 200)+","+getRandomValue(180,210)+","
+                    +getRandomValue(150,255)+","+getRandomFloatValue()+")");
         }
 
         DataSet dataSet = new DataSet();
@@ -209,8 +209,8 @@ public class OrderServiceImpl implements OrdersService {
         for(Plane plane : limitedPlanes) {
             labels.add(plane.getPlaneModel());
             data.add(plane.getSeatsCount());
-            backgroundColors.add("rgba("+getRandomValue(0, 255)+","+getRandomValue(0,255)+","
-                    +getRandomValue(0,255)+","+getRandomFloatValue()+")");
+            backgroundColors.add("rgba("+getRandomValue(130, 200)+","+getRandomValue(180,210)+","
+                    +getRandomValue(150,255)+","+getRandomFloatValue()+")");
         }
 
         DataSet dataSet = new DataSet();

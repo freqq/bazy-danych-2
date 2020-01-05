@@ -11,6 +11,7 @@ SEATS_COUNT_FIELD_ID = 'seatsCount'
 PLANES_SUBPAGE_BUTTON_ID = 'planes'
 ADD_NEW_BUTTON_ID = 'add-new-button'
 PROGRESS_INDICATOR_ID = 'progress-indicator'
+TRASH_BUTTON_CLASS = '.fa-trash-alt'
 
 class PlanesPage(unittest.TestCase):
     def setUp(self):
@@ -34,6 +35,9 @@ class PlanesPage(unittest.TestCase):
     def test_should_remove_plane(self):
         self._login_to_website_and_wait_to_load()
         self._click_on_planes_subpage()
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, TRASH_BUTTON_CLASS))).click()
+
+
         # GET FIRST ROW, DELETE AND CHECK
 
     def test_should_edit_plane(self):
@@ -50,7 +54,7 @@ class PlanesPage(unittest.TestCase):
         elem = self.driver.find_element_by_id("login-input")
         elem.send_keys("admin")
         elem = self.driver.find_element_by_id("password-input")
-        elem.send_keys("admin")
+        elem.send_keys("admin2")
         elem.send_keys(Keys.RETURN)
         self.driver.find_element_by_class_name("login-button").click()
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".toolbar-header")))
