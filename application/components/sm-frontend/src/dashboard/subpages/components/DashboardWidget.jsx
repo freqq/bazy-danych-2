@@ -20,6 +20,20 @@ const DashboardWidgetWrapper = styled.div.attrs({
 
 const StyledLine = styled(Doughnut).attrs({ className: "styled-line" })``;
 
+const NoChartData = styled.div.attrs({ className: "no-chart-data" })`
+  height: 335px;
+  position: relative;
+`;
+
+const NoChartDataText = styled.p.attrs({ className: "no-chart-data-text" })`
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 18px;
+  transform: translate(-50%, -240%);
+`;
+
 const WidgetTitle = styled.p.attrs({ className: "widget-title" })`
   font-size: 12px;
   font-weight: 500;
@@ -30,6 +44,10 @@ const WidgetTitle = styled.p.attrs({ className: "widget-title" })`
 `;
 
 class DashboardWidget extends Component {
+  componentWillReceiveProps(props) {
+    console.log(props);
+  }
+
   render() {
     const {
       widgetTitle,
@@ -42,21 +60,33 @@ class DashboardWidget extends Component {
     return (
       <DashboardWidgetWrapper>
         <WidgetTitle>{widgetTitle}</WidgetTitle>
-        <StyledLine
-          data={chartData}
-          height="200"
-          options={{
-            title: {
-              display: displayTitle,
-              text: widgetTitle,
-              fontSize: 18
-            },
-            legend: {
-              display: displayLegend,
-              position: legendPosition
-            }
-          }}
-        />
+        {chartData.labels ? (
+          chartData.labels.length > 0 ? (
+            <StyledLine
+              data={chartData}
+              height="200"
+              options={{
+                title: {
+                  display: displayTitle,
+                  text: widgetTitle,
+                  fontSize: 18
+                },
+                legend: {
+                  display: displayLegend,
+                  position: legendPosition
+                }
+              }}
+            />
+          ) : (
+            <NoChartData>
+              <NoChartDataText>No data</NoChartDataText>
+            </NoChartData>
+          )
+        ) : (
+          <NoChartData>
+            <NoChartDataText>No data</NoChartDataText>
+          </NoChartData>
+        )}
       </DashboardWidgetWrapper>
     );
   }
