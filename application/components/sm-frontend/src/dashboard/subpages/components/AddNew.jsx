@@ -101,6 +101,7 @@ class AddNew extends Component {
           selectItems={this.props.carriersData}
           onChange={this.onChange}
           name={item}
+          id={this.camelize(item)}
         />
       );
     } else if (this.camelize(item).toLowerCase() === "planename") {
@@ -109,6 +110,7 @@ class AddNew extends Component {
           selectItems={this.props.planesData}
           onChange={this.onChange}
           name={item}
+          id={this.camelize(item)}
         />
       );
     } else if (this.camelize(item).toLowerCase() === "client") {
@@ -117,6 +119,7 @@ class AddNew extends Component {
           selectItems={this.props.clientsData}
           onChange={this.onChange}
           name={item}
+          id={this.camelize(item)}
         />
       );
     } else if (this.camelize(item).toLowerCase() === "flight") {
@@ -125,6 +128,7 @@ class AddNew extends Component {
           selectItems={this.props.flightsData}
           onChange={this.onChange}
           name={item}
+          id={this.camelize(item)}
         />
       );
     } else if (this.camelize(item).toLowerCase() === "ticket") {
@@ -133,6 +137,7 @@ class AddNew extends Component {
           selectItems={this.props.ticketsData}
           onChange={this.onChange}
           name={item}
+          id={this.camelize(item)}
         />
       );
     } else

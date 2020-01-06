@@ -21,7 +21,7 @@ const TextArea = styled.div.attrs({ className: "text-area" })`
   grid-area: text-area;
   background: url(${loginBg}) no-repeat;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 `;
 

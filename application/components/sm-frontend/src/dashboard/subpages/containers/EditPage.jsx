@@ -261,12 +261,14 @@ class EditPage extends Component {
           ) : null
         )}
         <EditButton
+          id="edit-button"
           disabled={!canSendForm}
           text="Save"
           icon="far fa-save"
           onClick={this.handleSave}
         />
         <EditButton
+          id="cancel-button"
           text="Cancel"
           icon="far fa-times-circle"
           onClick={this.props.handleCancel}

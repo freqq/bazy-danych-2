@@ -6,6 +6,7 @@ const CenteringWrapper = styled.div`
   position: absolute;
   top: 80%;
   left: 50%;
+  z-index: 99;
 `;
 
 const ProgressIndicatorCircular = () => {

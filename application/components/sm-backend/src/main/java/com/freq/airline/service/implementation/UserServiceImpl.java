@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
                 user.get().setFirstName(userEditRequest.getFirstName());
             if(userEditRequest.getLastName() != null)
                 user.get().setLastName(userEditRequest.getLastName());
-            if(userEditRequest.getPassword() != null || userEditRequest.getPassword().length() > 5)
+            if(userEditRequest.getPassword() != null && userEditRequest.getPassword().length() > 5)
                 user.get().setPassword(passwordEncoder.encode(userEditRequest.getPassword()));
 
             userRepository.save(user.get());

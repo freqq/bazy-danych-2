@@ -41,9 +41,9 @@ const ButtonIcon = styled.i.attrs({
 
 class EditButton extends Component {
   render() {
-    const { text, icon, onClick, disabled } = this.props;
+    const { text, icon, onClick, disabled, id } = this.props;
     return (
-      <EditButtonWrapper onClick={onClick} disabled={disabled}>
+      <EditButtonWrapper onClick={onClick} disabled={disabled} id={id}>
         <ButtonIcon className={icon} />
         {text}
       </EditButtonWrapper>
@@ -55,7 +55,8 @@ EditButton.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired
+  disabled: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default EditButton;

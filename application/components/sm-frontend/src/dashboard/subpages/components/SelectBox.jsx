@@ -36,10 +36,11 @@ class SelectBox extends Component {
   };
 
   render() {
-    const { selectItems, name } = this.props;
+    const { selectItems, name, id } = this.props;
 
     return (
       <SelectBoxWrapper
+        id={id}
         onChange={this.onChange}
         value={this.state.value}
         name={name}
@@ -61,6 +62,7 @@ SelectBox.propTypes = {
   selectItems: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   value: PropTypes.string
 };
 

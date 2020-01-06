@@ -293,7 +293,7 @@ class UserProfile extends Component {
               />
             </ProfileEditElement>
           </InfoList>
-          <SaveButton disabled={!canSendForm} onClick={this.handleSubmit}>
+          <SaveButton disabled={!canSendForm} onClick={this.handleSubmit} id="save-button">
             Save
           </SaveButton>
         </UserRightWrapper>

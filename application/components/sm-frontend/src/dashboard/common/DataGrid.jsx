@@ -101,7 +101,7 @@ class DataGrid extends Component {
           <NoData>No data.</NoData>
         ) : (
           this.props.rowData.map(item => (
-            <DataGridRow key={item}>
+            <DataGridRow key={item} className='data-grid-row-data'>
               {Object.keys(item).map(key => {
                 if (key !== "id") {
                   if (key.toLowerCase().includes("discount"))

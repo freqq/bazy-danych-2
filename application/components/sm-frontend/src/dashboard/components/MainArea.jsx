@@ -71,7 +71,7 @@ class MainArea extends Component {
         <MainAreaNavBar>
           <NavbarRightMenu>
             <NavbarRightMenuItem>
-              <NavbarLink to="/admin/profile">
+              <NavbarLink id="profile-link" to="/admin/profile">
                 <UserCircle>{userName.charAt(0).toUpperCase()}</UserCircle>
                 {userName}
               </NavbarLink>
