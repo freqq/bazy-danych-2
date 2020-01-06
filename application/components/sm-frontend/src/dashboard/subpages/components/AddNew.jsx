@@ -14,7 +14,8 @@ class AddNew extends Component {
     super(props);
     this.state = {
       neededFields: [],
-      canSendForm: false
+      canSendForm: false,
+      fieldsWithError: []
     };
   }
 
@@ -43,16 +44,32 @@ class AddNew extends Component {
       })
       .replace(/\s+/g, "");
 
+  setSaveStatus = () => {
+    const { fieldsWithError } = this.state;
+    let canSendFormValue = true;
+
+    this.state.neededFields.forEach(field => {
+      if (!(field in this.state) || this.state[field].length === 0) {
+        canSendFormValue = false;
+      }
+    });
+
+    this.setState({
+      canSendForm: fieldsWithError.length === 0 && canSendFormValue
+    });
+  };
+
   onChange = event => {
     var camelized = this.camelize(event.target.name);
     var canSendForm = true;
+    const fieldValue = event.target.value;
 
     if (camelized.toLowerCase().includes("idnumber"))
       camelized = camelized.toLowerCase();
 
     this.setState(
       {
-        [camelized]: event.target.value
+        [camelized]: fieldValue
       },
       () => {
         this.state.neededFields.forEach(field => {
@@ -61,9 +78,92 @@ class AddNew extends Component {
           }
         });
 
-        this.setState({
-          canSendForm: canSendForm
-        });
+        this.setState(
+          {
+            canSendForm: canSendForm
+          },
+          () => {
+            let isError = false;
+            let errorText = "";
+
+            if (fieldValue.length === 0) {
+              isError = true;
+              errorText = "Value must not be blank!";
+            } else if (
+              camelized === "seatsCount" &&
+              !this.isNumeric(fieldValue)
+            ) {
+              isError = true;
+              errorText = "Value must be an integer!";
+            } else if (camelized === "pesel" && !this.isPesel(fieldValue)) {
+              isError = true;
+              errorText = "Value is not a valid PESEL number!";
+            } else if (
+              camelized === "birthday" &&
+              !this.isTimestamp(fieldValue)
+            ) {
+              isError = true;
+              errorText = "Value is not a valid date timestamp (yyyy-mm-dd)!";
+            } else if (camelized === "email" && !this.isEmail(fieldValue)) {
+              isError = true;
+              errorText = "Value is not a valid email!";
+            } else if (
+              camelized === "baggageWeight" &&
+              !this.isNumeric(fieldValue)
+            ) {
+              isError = true;
+              errorText = "Value must be an integer!";
+            } else if (camelized === "price" && !this.isNumeric(fieldValue)) {
+              isError = true;
+              errorText = "Value must be an integer!";
+            } else if (
+              camelized === "flightDate" &&
+              !this.isTimestamp(fieldValue)
+            ) {
+              isError = true;
+              errorText = "Value is not a valid date timestamp (yyyy-mm-dd)!";
+            }
+
+            if (isError)
+              this.setState(
+                {
+                  fieldsWithError: [...this.state.fieldsWithError, camelized]
+                },
+                () => {
+                  this.setState(
+                    {
+                      [camelized + "IsError"]: isError,
+                      [camelized + "ErrorText"]: errorText
+                    },
+                    () => {
+                      this.setSaveStatus();
+                    }
+                  );
+                }
+              );
+            else
+              this.setState(
+                {
+                  fieldsWithError: this.state.fieldsWithError.filter(function(
+                    event
+                  ) {
+                    return event !== camelized;
+                  })
+                },
+                () => {
+                  this.setState(
+                    {
+                      [camelized + "IsError"]: isError,
+                      [camelized + "ErrorText"]: errorText
+                    },
+                    () => {
+                      this.setSaveStatus();
+                    }
+                  );
+                }
+              );
+          }
+        );
       }
     );
   };
@@ -73,6 +173,29 @@ class AddNew extends Component {
     const value = event.target.checked;
     this.setState({ [camelized]: value });
   };
+
+  isNumeric = number => /^-{0,1}\d+$/.test(number);
+
+  isPesel = pesel => {
+    if (typeof pesel !== "string") return false;
+
+    let weight = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
+    let sum = 0;
+    let controlNumber = parseInt(pesel.substring(10, 11));
+    for (let i = 0; i < weight.length; i++) {
+      sum += parseInt(pesel.substring(i, i + 1)) * weight[i];
+    }
+    sum = sum % 10;
+    return 10 - sum === controlNumber;
+  };
+
+  isEmail = email =>
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
+      email
+    );
+
+  isTimestamp = date =>
+    /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/.test(date);
 
   addData = () => {
     var addRequest = {};
@@ -147,6 +270,8 @@ class AddNew extends Component {
           placeholder={item}
           onChange={this.onChange}
           id={this.camelize(item)}
+          error={this.state[this.camelize(item) + "IsError"]}
+          errorMsg={this.state[this.camelize(item) + "ErrorText"]}
         />
       );
   };
