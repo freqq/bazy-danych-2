@@ -1,3 +1,4 @@
+language: java
 sudo: required
 
 services:
@@ -5,7 +6,14 @@ services:
 
 before_install:
  - docker-compose --version
+ - cd application
+ - cd components/sm-frontend
+ - yarn install
+ - yarn test
+ - cd ../sm-backend
+ - gradle test
+ - cd ../../
 
 script:
- - cd application
  - docker-compose up
+ 
